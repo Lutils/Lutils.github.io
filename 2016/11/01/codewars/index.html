@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>LeetCode | Lutils</title>
+  <title>CodeWars | Lutils</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录一些LeetCode上不错的题">
+  <meta name="description" content="记录一些CodeWars上不错的题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode">
-<meta property="og:url" content="http://lutils.cn/2016/11/09/leetcode/index.html">
+<meta property="og:title" content="CodeWars">
+<meta property="og:url" content="http://lutils.cn/2016/11/01/codewars/index.html">
 <meta property="og:site_name" content="Lutils">
-<meta property="og:description" content="记录一些LeetCode上不错的题">
-<meta property="og:updated_time" content="2016-11-07T04:16:08.374Z">
+<meta property="og:description" content="记录一些CodeWars上不错的题">
+<meta property="og:updated_time" content="2016-11-09T10:19:52.083Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode">
-<meta name="twitter:description" content="记录一些LeetCode上不错的题">
+<meta name="twitter:title" content="CodeWars">
+<meta name="twitter:description" content="记录一些CodeWars上不错的题">
   
     <link rel="alternative" href="/atom.xml" title="Lutils" type="application/atom+xml">
   
@@ -135,7 +135,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-leetcode" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-codewars" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -145,7 +145,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      LeetCode
+      CodeWars
     </h1>
   
 
@@ -153,28 +153,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>记录一些LeetCode上不错的题<br><a id="more"></a></p>
+        <p>记录一些CodeWars上不错的题<br><a id="more"></a></p>
 <blockquote>
-<p>Sum of Two Integers - 不用加减乘除运算符计算加法 </p>
+<p>手机键盘按键次数问题</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSum</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> tempResult = a &amp; b;</div><div class="line">		<span class="keyword">return</span> tempResult == <span class="number">0</span> ? a ^ b : getSum(tempResult &lt;&lt; <span class="number">1</span>, a ^ b);     </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>A&amp;B – 确定进位位  /   A^B – 不带进位加</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Keypad</span> </span>&#123;</div><div class="line">  <span class="keyword">static</span> String[] keys = &#123;<span class="string">"1"</span>, <span class="string">"ABC2"</span>, <span class="string">"DEF3"</span>, <span class="string">"GHI4"</span>, <span class="string">"JKL5"</span>,</div><div class="line">                          <span class="string">"MNO6"</span>, <span class="string">"PQRS7"</span>, <span class="string">"TUV8"</span>, <span class="string">"WXYZ9"</span>, <span class="string">"*"</span>, <span class="string">" 0"</span>, <span class="string">"#"</span>&#125;;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">presses</span><span class="params">(String phrase)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> nPresses = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">char</span> c : phrase.toUpperCase().toCharArray())</div><div class="line">      <span class="keyword">for</span> (String s : keys)</div><div class="line">          nPresses += s.indexOf(c) + <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> nPresses;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <blockquote>
-<p>Add Digits - 不断计算数字各项项加,最终只剩一位时,返回该数字</p>
+<p>数字降序排列</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">addDigits</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> num == <span class="number">0</span> ? <span class="number">0</span> : (num % <span class="number">9</span> == <span class="number">0</span> ? <span class="number">9</span> : (num % <span class="number">9</span>));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>因为ab%9%9%9==ab%9, 故只需return num%9; 特殊情况为num==0 or num==9  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DescendingOrder</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">sortDesc</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> num)</span> </span>&#123;</div><div class="line">        <span class="keyword">char</span>[] c = String.valueOf(num).toCharArray();</div><div class="line">        java.util.Arrays.sort(c);</div><div class="line">        <span class="keyword">return</span> Integer.parseInt(<span class="keyword">new</span> StringBuffer(<span class="keyword">new</span> String(c)).reverse().toString());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <blockquote>
-<p>Longest Palindrome - 字符串所有字符可构成最大回文数长度</p>
+<p>字符串依每一项中的数字进行排序</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (s == <span class="keyword">null</span>)</div><div class="line">			<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">		HashSet&lt;Character&gt; set = <span class="keyword">new</span> HashSet&lt;Character&gt;();</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</div><div class="line">			<span class="keyword">if</span> (set.contains(s.charAt(i))) &#123;</div><div class="line">				set.remove(s.charAt(i));</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				set.add(s.charAt(i));</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">int</span> temp = s.length() - set.size();</div><div class="line">		</div><div class="line">		<span class="keyword">return</span> set.size() &gt; <span class="number">0</span> ? temp + <span class="number">1</span> : temp;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>主要依据Set集合元素的唯一性</p>
-<blockquote>
-<p>Convert a Number to Hexadecimal</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">char</span>[] map = &#123;<span class="string">'0'</span>,<span class="string">'1'</span>,<span class="string">'2'</span>,<span class="string">'3'</span>,<span class="string">'4'</span>,<span class="string">'5'</span>,<span class="string">'6'</span>,<span class="string">'7'</span>,<span class="string">'8'</span>,<span class="string">'9'</span>,<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>,<span class="string">'f'</span>&#125;;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toHex</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(num == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">"0"</span>;</div><div class="line">        String result = <span class="string">""</span>;</div><div class="line">        <span class="keyword">while</span>(num != <span class="number">0</span>)&#123;</div><div class="line">            result = map[(num &amp; <span class="number">15</span>)] + result; </div><div class="line">            num = (num &gt;&gt;&gt; <span class="number">4</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>转换为十六进制、&gt;&gt;&gt;无符号右移,左边填充0</p>
-
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Order</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">order</span><span class="params">(String words)</span> </span>&#123;</div><div class="line">		String[] arr = words.split(<span class="string">" "</span>);</div><div class="line">		StringBuilder result = <span class="keyword">new</span> StringBuilder(<span class="string">""</span>);</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">			<span class="keyword">for</span> (String s : arr) &#123;</div><div class="line">				<span class="keyword">if</span> (s.contains(String.valueOf(i))) &#123;</div><div class="line">					result.append(s + <span class="string">" "</span>);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> result.toString().trim();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     <div class="article-info article-info-index">
@@ -196,7 +187,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="leetcode" data-title="LeetCode" data-url="http://lutils.cn/2016/11/09/leetcode/"></div>
+	<div class="ds-thread" data-thread-key="codewars" data-title="CodeWars" data-url="http://lutils.cn/2016/11/01/codewars/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

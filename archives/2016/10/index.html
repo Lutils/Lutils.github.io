@@ -4,18 +4,14 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>CodeWars | Lutils</title>
+  <title>Archives: 2016/10 | Lutils</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录一些CodeWars上不错的题">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CodeWars">
-<meta property="og:url" content="http://lutils.cn/2016/11/09/codewars/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Lutils">
+<meta property="og:url" content="http://lutils.cn/archives/2016/10/index.html">
 <meta property="og:site_name" content="Lutils">
-<meta property="og:description" content="记录一些CodeWars上不错的题">
-<meta property="og:updated_time" content="2016-11-01T15:10:41.785Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CodeWars">
-<meta name="twitter:description" content="记录一些CodeWars上不错的题">
+<meta name="twitter:title" content="Lutils">
   
     <link rel="alternative" href="/atom.xml" title="Lutils" type="application/atom+xml">
   
@@ -135,77 +131,54 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-codewars" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      CodeWars
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2016/10/24/python/" class="archive-article-date">
+  	<time datetime="2016-10-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-24</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/10/24/python/">python基础</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>记录一些CodeWars上不错的题<br><a id="more"></a></p>
-<blockquote>
-<p>手机键盘按键次数问题</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Keypad</span> </span>&#123;</div><div class="line">  <span class="keyword">static</span> String[] keys = &#123;<span class="string">"1"</span>, <span class="string">"ABC2"</span>, <span class="string">"DEF3"</span>, <span class="string">"GHI4"</span>, <span class="string">"JKL5"</span>,</div><div class="line">                          <span class="string">"MNO6"</span>, <span class="string">"PQRS7"</span>, <span class="string">"TUV8"</span>, <span class="string">"WXYZ9"</span>, <span class="string">"*"</span>, <span class="string">" 0"</span>, <span class="string">"#"</span>&#125;;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">presses</span><span class="params">(String phrase)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> nPresses = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">char</span> c : phrase.toUpperCase().toCharArray())</div><div class="line">      <span class="keyword">for</span> (String s : keys)</div><div class="line">          nPresses += s.indexOf(c) + <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> nPresses;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>数字降序排列</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DescendingOrder</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">sortDesc</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> num)</span> </span>&#123;</div><div class="line">        <span class="keyword">char</span>[] c = String.valueOf(num).toCharArray();</div><div class="line">        java.util.Arrays.sort(c);</div><div class="line">        <span class="keyword">return</span> Integer.parseInt(<span class="keyword">new</span> StringBuffer(<span class="keyword">new</span> String(c)).reverse().toString());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>字符串依每一项中的数字进行排序</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Order</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">order</span><span class="params">(String words)</span> </span>&#123;</div><div class="line">		String[] arr = words.split(<span class="string">" "</span>);</div><div class="line">		StringBuilder result = <span class="keyword">new</span> StringBuilder(<span class="string">""</span>);</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">			<span class="keyword">for</span> (String s : arr) &#123;</div><div class="line">				<span class="keyword">if</span> (s.contains(String.valueOf(i))) &#123;</div><div class="line">					result.append(s + <span class="string">" "</span>);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> result.toString().trim();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-	  
-	  
-	  
-      
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+	</div>
 
-      <div class="clearfix"></div>
-    </div>
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
+  
+  
+    </div></section>
+  
 
-
-
-
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="codewars" data-title="CodeWars" data-url="http://lutils.cn/2016/11/09/codewars/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"lutils"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
-
+    
 
 
       </div>
@@ -228,8 +201,8 @@
 		mathjax: false,
 		animate: true,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
