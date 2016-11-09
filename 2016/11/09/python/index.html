@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>python基础 | Lutils</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="有序集合：list,tuple,str,unicode
+无序集合：set
+无序集合并且具有key-value对：dict">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python基础">
+<meta property="og:url" content="http://lutils.cn/2016/11/09/python/index.html">
+<meta property="og:site_name" content="Lutils">
+<meta property="og:description" content="有序集合：list,tuple,str,unicode
+无序集合：set
+无序集合并且具有key-value对：dict">
+<meta property="og:updated_time" content="2016-10-24T14:04:45.952Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python基础">
+<meta name="twitter:description" content="有序集合：list,tuple,str,unicode
+无序集合：set
+无序集合并且具有key-value对：dict">
+  
+    <link rel="alternative" href="/atom.xml" title="Lutils" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <script src="/style.js"></script>
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="\assets\img\headimg.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Lutils</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/comments.html">留言板</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Lutils" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=SXB4eH58fH56cAk4OGcqJiQ" title="mail">mail</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Lutils</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="\assets\img\headimg.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Lutils</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/comments.html">留言板</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Lutils" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=SXB4eH58fH56cAk4OGcqJiQ" title="mail">mail</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-python" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>有序集合：list,tuple,str,unicode</li>
+<li>无序集合：set</li>
+<li>无序集合并且具有key-value对：dict</li>
+</ol>
+<a id="more"></a>
+<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">list: L = [<span class="string">'Michael'</span>, <span class="number">100</span>, <span class="keyword">True</span>]</div></pre></td></tr></table></figure>
+<pre><code>列表,是一种有序的集合,可以随时添加和删除其中的元素
+list中包含的元素并不要求都必须是同一种数据类型
+list查找速度随着元素增加而逐渐下降、占用内存小,但是查找速度慢
+
+1.访问元素:可通过索引的方式访问列表元素,第一个元素为L[0],也可倒序访问,如最后一个元素为L[-1]
+2.添加元素:append()方法在list末尾添加元素、insert(索引号,待添加的新元素)在指定索引位置添加
+3.删除元素:pop()方法删掉list的最后一个元素,并返回这个元素、pop(索引号)删除指定索引位置的元素
+</code></pre><h1 id="元祖"><a href="#元祖" class="headerlink" title="元祖"></a>元祖</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tuple: t = (<span class="string">'Adam'</span>, <span class="string">'Lisa'</span>, <span class="string">'Bart'</span>)</div></pre></td></tr></table></figure>
+<pre><code>元祖,是另一种有序的列表,一旦创建完毕,就不能修改
+访问元素的方式与list相同、单元素tuple定义方式:(1,)可防止被解析为整数1
+</code></pre><h1 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dict: d = &#123;</div><div class="line">    <span class="string">'Adam'</span>: <span class="number">95</span>,</div><div class="line">    <span class="string">'Lisa'</span>: <span class="number">85</span>,</div><div class="line">    <span class="string">'Bart'</span>: <span class="number">59</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>查找速度快(所有元素查找速度相同、但占用内存大)、元素无序、作为key的元素不可变(故list不可作为key)
+通过key访问dict的value、也可通过dict本身提供的一个get(key)方法返回对应value
+</code></pre><h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set: s = set([<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>])</div></pre></td></tr></table></figure>
+<p>可变对象不能放入set中、元素无序(传入包含重复元素的list,set会自动去掉重复的元素)</p>
+<pre><code>1.创建set:调用set()并传入一个list,list的元素将作为set的元素
+2.访问set:只能判断一个元素是否在set中
+3.添加元素:add(添加的元素)、删除元素:remove(删除的元素)
+</code></pre><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><pre><code>整型、浮点型、字符串、布尔值、空值
+</code></pre><h2 id="raw字符串"><a href="#raw字符串" class="headerlink" title="raw字符串"></a>raw字符串</h2><pre><code>在字符串前面加个前缀 r ,表示这是一个 raw 字符串,
+里面的字符则无需要转义(r&apos;...&apos;不能表示多行字符串，也不能表示包含&apos;和&quot;的字符串)
+多行字符串:用&apos;&apos;&apos;...&apos;&apos;&apos;表示
+</code></pre><h2 id="定义可变参数"><a href="#定义可变参数" class="headerlink" title="定义可变参数"></a>定义可变参数</h2><pre><code>可变参数的名字前面有个*号,Python解释器会把传入的一组参数组装成一个tuple传递给可变参数
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fn</span><span class="params">(*args)</span>:</span></div><div class="line">    <span class="keyword">print</span> args</div></pre></td></tr></table></figure>
+<h2 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h2><p>对list进行切片:</p>
+<pre><code>L[0:3] 表示,从索引0开始取,直到索引3为止,但不包括索引3的3个元素(第一个索引是0,可以省略为L[:3])
+L[:]   表示所有元素,实际上复制出了一个新list
+L[::2] 第三个参数表示每N个取一个,L[::2]会每两个元素取出一个来,也就是隔一个取一个
+</code></pre><p>同理可得倒序切片与对字符串的切片</p>
+<h2 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h2><pre><code>1.形式:
+    for ... in ...
+2.索引迭代:    
+    enumerate()函数把 
+    [&apos;Adam&apos;, &apos;Lisa&apos;, &apos;Bart&apos;, &apos;Paul&apos;]
+    变成了类似 
+    [(0, &apos;Adam&apos;), (1, &apos;Lisa&apos;), (2, &apos;Bart&apos;), (3, &apos;Paul&apos;)]
+    因此,迭代的每一个元素实际上是一个tuple: 
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> index, name <span class="keyword">in</span> enumerate(L):</div><div class="line">    <span class="keyword">print</span> index, <span class="string">'-'</span>, name</div></pre></td></tr></table></figure>
+<pre><code>3.迭代dict的value: 
+    values()方法把dict转换成一个包含所有value的list,再通过遍历这个list来遍历value
+    itervalues()方法会在迭代过程中依次从dict中取出value,所以比values()方法节省了生成list所需的内存
+
+4.迭代dict的key和value: 
+    items()方法把dict对象转换成了包含tuple的list,对这个list进行迭代,可同时获得key和value
+    iteritems()不把dict转换成list,而是在迭代过程中不断给出tuple,所以,iteritems()不占用额外的内存
+</code></pre><h2 id="列表生成式"><a href="#列表生成式" class="headerlink" title="列表生成式"></a>列表生成式</h2><pre><code>1.生成列表:        
+        range(1, 11)
+        &gt;&gt;&gt;[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        [x * x for x in range(1, 11)] 
+        &gt;&gt;&gt;[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+2.多层表达式:
+            [m + n for m in &apos;ABC&apos; for n in &apos;123&apos;]
+        &gt;&gt;&gt; [&apos;A1&apos;, &apos;A2&apos;, &apos;A3&apos;, &apos;B1&apos;, &apos;B2&apos;, &apos;B3&apos;, &apos;C1&apos;, &apos;C2&apos;, &apos;C3&apos;]
+</code></pre><h2 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h2><pre><code>1.函数作为参数:    
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(x, y, f)</span>:</span></div><div class="line">    <span class="keyword">return</span> f(x) + f(y)</div></pre></td></tr></table></figure>
+<pre><code>2.map():
+  接收一个函数f和一个list,并通过把函数f依次作用在list的每个元素上,
+  得到一个新的list并返回(不改变原有的list)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="keyword">return</span> x*x</div><div class="line"><span class="keyword">print</span> map(f, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>])</div></pre></td></tr></table></figure>
+<pre><code>3.reduce():
+    接收的参数和map()类似,但reduce()传入的函数f必须接收两个参数,
+    reduce()对list的每个元素反复调用函数f,并返回最终结果值
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x, y)</span>:</span></div><div class="line">    <span class="keyword">return</span> x + y</div><div class="line">reduce(f, [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>])</div></pre></td></tr></table></figure>
+<pre><code>    实际上是对 list 的所有元素求和,结果为25
+    reduce()还可以接收第3个可选参数,作为计算的初始值,reduce(f, [1, 3, 5, 7, 9], 100)结果将变为125
+4.filter():
+    接收的参数和map()类似,传入的函数f的作用是对每个元素进行判断,
+    返回True或False,根据判断结果自动过滤掉不符合条件的元素,返回由符合条件元素组成的新list
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_odd</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="keyword">return</span> x % <span class="number">2</span> == <span class="number">1</span></div><div class="line">filter(is_odd, [<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">12</span>, <span class="number">17</span>])</div></pre></td></tr></table></figure>
+<pre><code>结果为[1, 7, 9, 17]
+</code></pre><h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><pre><code>内层函数引用了外层函数的变量(参数也算变量),然后返回内层函数的情况,称为闭包
+闭包的特点是返回的函数还引用了外层函数的局部变量,所以,要正确使用闭包,
+就要确保引用的局部变量在函数返回后不能变
+</code></pre><h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><pre><code>关键字lambda表示匿名函数,冒号前面的x表示函数参数
+匿名函数 lambda x : x * x 实际上就是:
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="keyword">return</span> x * x</div></pre></td></tr></table></figure>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+	  
+	  
+	  
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="python" data-title="python基础" data-url="http://lutils.cn/2016/11/09/python/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"lutils"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+
+    <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div>
+    		&copy; 2016 Lutils
+    	</div>
+		
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+
+
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/oj/" style="font-size: 20px;">oj</a> <a href="/tags/python/" style="font-size: 10px;">python</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://lutils.github.io/">友链</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
