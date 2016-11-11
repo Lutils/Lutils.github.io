@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://lutils.cn/2016/11/09/javaweb/index.html">
 <meta property="og:site_name" content="Lutils">
 <meta property="og:description" content="servlet/jsp/request/response/cookie/session">
-<meta property="og:updated_time" content="2016-11-09T10:20:01.601Z">
+<meta property="og:updated_time" content="2016-11-11T04:08:04.381Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java web基础">
 <meta name="twitter:description" content="servlet/jsp/request/response/cookie/session">
@@ -188,7 +188,65 @@
 <ol>
 <li>this.getServletContext.getRequestDispatcher(String path).forward(request,response);</li>
 </ol>
+<blockquote>
+<p>HttpServletResponse</p>
+</blockquote>
+<p><em>Web服务器收到客户端的http请求,会针对每一次请求,分别创建一个用于代表请求的request对象,和代表响应的response对象</em></p>
+<h3 id="响应行"><a href="#响应行" class="headerlink" title="响应行"></a>响应行</h3><ol>
+<li>setStatus(int sc) //设置响应状态码</li>
+</ol>
+<h3 id="响应头"><a href="#响应头" class="headerlink" title="响应头"></a>响应头</h3><ol>
+<li>sendRedirect(String location) //请求重定向</li>
+<li>setHeader(String name, String value) //设置响应头信息<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//告知浏览器使用什么码表</span></div><div class="line">response.setHeader(<span class="string">"content-type"</span>, <span class="string">"text/html;charset=UTF-8"</span>);</div><div class="line"></div><div class="line"><span class="comment">//告知客户端不缓存</span></div><div class="line">response.setHeader(<span class="string">"pragma"</span>, <span class="string">"no-cache"</span>);</div><div class="line">response.setHeader(<span class="string">"cache-control"</span>, <span class="string">"no-cache"</span>);</div><div class="line">response.setDateHeader(<span class="string">"expires"</span>, <span class="number">0</span>);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="响应正文"><a href="#响应正文" class="headerlink" title="响应正文"></a>响应正文</h3><ol>
+<li>getWrite(); //字符输出流</li>
+<li>getOutputStream(); //字节输出流</li>
+<li>setCharacterEncoding(String charset); //告知服务器使用什么编码</li>
+<li>setContentType(String type); //设置ContentType</li>
+</ol>
+<blockquote>
+<p>HttpServletRequest</p>
+</blockquote>
+<h3 id="请求行"><a href="#请求行" class="headerlink" title="请求行"></a>请求行</h3><ol>
+<li>getMethod(); //获得请求方式</li>
+<li>getRequestURL(); //返回客户端发出请求时的完整URL</li>
+<li>getRequestURI(); //返回请求行中的资源名部分</li>
+<li>getContextPath(); //当前应用的虚拟目录</li>
+</ol>
+<h3 id="请求消息头"><a href="#请求消息头" class="headerlink" title="请求消息头"></a>请求消息头</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function">String <span class="title">getHeader</span><span class="params">(String name)</span></span>;  <span class="comment">//根据头名称得到头信息值</span></div><div class="line"><span class="function">Enumeration <span class="title">getHeaderNames</span><span class="params">()</span></span>;  <span class="comment">//得到所有头信息name</span></div><div class="line"><span class="function">Enumeration <span class="title">getHeaders</span><span class="params">(String name)</span></span>;  <span class="comment">//根据头名称得到相同名称头信息值</span></div></pre></td></tr></table></figure>
+<h3 id="请求正文"><a href="#请求正文" class="headerlink" title="请求正文"></a>请求正文</h3><p>与获取表单数据相关的方法</p>
+<ol>
+<li>getParameter(name); //根据表单中name属性的名，获取value属性的值方法 </li>
+<li>getParameterValues(String name); //专业为复选框取取提供的方法</li>
+<li>getParameterNames(); //得到表单提交的所有name的方法 </li>
+<li>getParameterMap(); //到表单提交的所有值的方法</li>
+<li>getInputStream();  //以字节流的方式得到所有表单数据</li>
+</ol>
+<p>与操作非表单数据相关的方法(request也是一个域对象)</p>
+<ol>
+<li>setAttribute(String name, Object value);</li>
+<li>getAttribute(String name);</li>
+<li>removeAttribute(String name);</li>
+</ol>
+<p>与请求转发相关的方法</p>
+<ol>
+<li>RequestDispatcher getRequestDispatcher(String path); //请求转发或请求包含的协助对象</li>
+<li>getRequestDispatcher(path).forward(request,response); //请求转发</li>
+<li>getRequestDispatcher(path).include(request,response); //请求包含</li>
+</ol>
+<p>与请求编码相关的方法</p>
+<ol>
+<li>request.setCharacterEncoding(“UTF-8”); //解决post方式编码</li>
+<li>String name = new String(name.getBytes(“iso-8859-1”),”UTF-8”);//解决get方式编码,所有属性都要设置一遍</li>
+</ol>
+<pre><code>转发与重定向的区别
 
+转发:request、由服务器执行、客户端只发送一次请求、地址栏不变、能够传递数据、为域对象
+
+重定向:response、由客户端执行、客户端发送两次请求、地址栏会发生变化、不能传递数据、可以跳转到其它应用
+</code></pre>
       
     </div>
     <div class="article-info article-info-index">
