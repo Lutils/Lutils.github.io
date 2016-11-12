@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://lutils.cn/2016/11/09/javaweb/index.html">
 <meta property="og:site_name" content="Lutils">
 <meta property="og:description" content="servlet/jsp/request/response/cookie/session">
-<meta property="og:updated_time" content="2016-11-11T04:08:04.381Z">
+<meta property="og:updated_time" content="2016-11-12T15:29:39.689Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java web基础">
 <meta name="twitter:description" content="servlet/jsp/request/response/cookie/session">
@@ -241,12 +241,58 @@
 <li>request.setCharacterEncoding(“UTF-8”); //解决post方式编码</li>
 <li>String name = new String(name.getBytes(“iso-8859-1”),”UTF-8”);//解决get方式编码,所有属性都要设置一遍</li>
 </ol>
-<pre><code>转发与重定向的区别
+<p>转发与重定向的区别<br>　　　转发:request、服务器执行、客户端只发送一次请求、地址栏不变、能够传递数据、为域对象<br>　　　重定向:response、客户端执行、客户端发送两次请求、地址栏发生变化、不能传递数据、可跳转到其它应用</p>
+<blockquote>
+<p>Cookie</p>
+</blockquote>
+<p><em>由于Cookie数据是由客户端来保存和携带的,所以称之为客户端技术</em>    </p>
+<p>Cookie是servlet发送到web浏览器的少量信息,这些信息由浏览器保存,然后发送回服务器<br>Cookie的值可以唯一的标识客户端,因此,Cookie常用于会话管理</p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ol>
+<li>name:  名称不能唯一确定一个Cookie,路径可能不同</li>
+<li>value:  不能存中文</li>
+<li>path:  默认值是写Cookie的那个程序的访问路径</li>
+<li>maxAge: cookie的缓存时间,默认是-1(默认存在浏览器的内存中),单位为秒<br>　　　　　-负数:  cookie的数据存在浏览器缓存中<br>　　　　　-0:  删除Cookie<br>　　　　　-正数:  缓存(持久化到磁盘上)的时间</li>
+</ol>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法:"></a>常用方法:</h3><ol>
+<li>Cookie(String name, String value);  //构造函数创建Cookie</li>
+<li>setPath();  //指定客户端应该返回cookie的路径</li>
+<li>setMaxAge(0);  //设置cookie的最大生存时间,以秒为单位,为0相当于删除cookie<h3 id="添加与获取Cookie"><a href="#添加与获取Cookie" class="headerlink" title="添加与获取Cookie"></a>添加与获取Cookie</h3></li>
+<li>response.addCookie(cookie);  //添加Cookie</li>
+<li>request.getCookies();  //获取Cookie</li>
+</ol>
+<blockquote>
+<p>HttpSession</p>
+</blockquote>
+<p><em>域对象,同一个会话下,可以使一个应用的多个资源共享数据</em><br>　<br>cookie为客户端技术,只能存字符串<br>session为服务器端的技术,可以存对象
+　</p>
+<h3 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h3><ol>
+<li>void setAttribute(String name,Object value);</li>
+<li>Object getAttribute(String name);</li>
+<li>void removeAttribute(String name);</li>
+<li>HttpSession.getId();  //获取Cookie的ID</li>
+<li>setMaxInactiveInterval(int interval);  //设置session的存活时间</li>
+<li>invalidate(); //使此会话无效</li>
+</ol>
+<h3 id="获取Seesion"><a href="#获取Seesion" class="headerlink" title="获取Seesion"></a>获取Seesion</h3><ol>
+<li>request.getSession();</li>
+</ol>
+<pre><code>getSession内部执行原理:
+1、获取名称为JSESSIONID的cookie的值
+2、若没有这样的cookie,创建一个新的HttpSession对象,分配一个唯一的SessionID,
+ 并且向客户端写一个名字为JSESSIONID=sessionID的cookie
+3、若有这样的Cookie,则获取cookie的值(即HttpSession对象的值),
+   从服务器的内存中根据ID找那个HttpSession对象,若找到这个对象,则取出Session,否则,返回2
+</code></pre><h3 id="客户端禁用Cookie后的会话数据保存问题"><a href="#客户端禁用Cookie后的会话数据保存问题" class="headerlink" title="客户端禁用Cookie后的会话数据保存问题"></a>客户端禁用Cookie后的会话数据保存问题</h3><p><em>禁用Cookie,则浏览器不会向服务器发送cookie的请求消息头</em></p>
+<p>解决方案</p>
+<ol>
+<li>在主页上给出不要禁用cookie提示</li>
+<li>URL重写,必须对网站的所有地址都重写</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">具体重写实现</div><div class="line">http://url---&gt;http://url;JSESSIONID=111</div><div class="line">response.encodeURL(String url);</div><div class="line">request.getSession();</div></pre></td></tr></table></figure>
+<h3 id="Session的状态"><a href="#Session的状态" class="headerlink" title="Session的状态"></a>Session的状态</h3><p>创建 – 当浏览器第一次访问服务器时,动态创建<br>存活 – 服务器正常运行<br>销毁 –<br>　　4种情况:<br>　　　　1. 自然销毁<br>　　　　2. Session.invalidate();强制销毁<br>　　　　3. 超时默认销毁(默认30min)<br>　　　　4. web.xml文件中servlet-config设置servlet-timeout  //Session有效时间、单位min<br>持久化:<br>　　1. 存盘<br>　　2. 内存中的一个全景图<br>　　3. IO实现serializable</p>
+<p>//内存溢出、服务器重启 -&gt; 钝化-搁置/活化-激活</p>
+<p>　</p>
 
-转发:request、由服务器执行、客户端只发送一次请求、地址栏不变、能够传递数据、为域对象
-
-重定向:response、由客户端执行、客户端发送两次请求、地址栏会发生变化、不能传递数据、可以跳转到其它应用
-</code></pre>
       
     </div>
     <div class="article-info article-info-index">
