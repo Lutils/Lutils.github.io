@@ -6,16 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>Java web基础 | Lutils</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="servlet/jsp/request/response/cookie/session">
+  <meta name="description" content="servlet/jsp/request/response/cookie/session/pageContext/EL表达式/JSTL标签库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java web基础">
 <meta property="og:url" content="http://lutils.cn/2016/11/09/javaweb/index.html">
 <meta property="og:site_name" content="Lutils">
-<meta property="og:description" content="servlet/jsp/request/response/cookie/session">
-<meta property="og:updated_time" content="2016-11-12T15:29:39.689Z">
+<meta property="og:description" content="servlet/jsp/request/response/cookie/session/pageContext/EL表达式/JSTL标签库">
+<meta property="og:updated_time" content="2016-11-14T10:09:27.115Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java web基础">
-<meta name="twitter:description" content="servlet/jsp/request/response/cookie/session">
+<meta name="twitter:description" content="servlet/jsp/request/response/cookie/session/pageContext/EL表达式/JSTL标签库">
   
     <link rel="alternative" href="/atom.xml" title="Lutils" type="application/atom+xml">
   
@@ -153,7 +153,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>servlet/jsp/request/response/cookie/session<br><a id="more"></a></p>
+        <p>servlet/jsp/request/response/cookie/session/pageContext/EL表达式/JSTL标签库<br><a id="more"></a></p>
 <blockquote>
 <p>Servlet</p>
 </blockquote>
@@ -291,7 +291,78 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">具体重写实现</div><div class="line">http://url---&gt;http://url;JSESSIONID=111</div><div class="line">response.encodeURL(String url);</div><div class="line">request.getSession();</div></pre></td></tr></table></figure>
 <h3 id="Session的状态"><a href="#Session的状态" class="headerlink" title="Session的状态"></a>Session的状态</h3><p>创建 – 当浏览器第一次访问服务器时,动态创建<br>存活 – 服务器正常运行<br>销毁 –<br>　　4种情况:<br>　　　　1. 自然销毁<br>　　　　2. Session.invalidate();强制销毁<br>　　　　3. 超时默认销毁(默认30min)<br>　　　　4. web.xml文件中servlet-config设置servlet-timeout  //Session有效时间、单位min<br>持久化:<br>　　1. 存盘<br>　　2. 内存中的一个全景图<br>　　3. IO实现serializable</p>
 <p>//内存溢出、服务器重启 -&gt; 钝化-搁置/活化-激活</p>
-<p>　</p>
+<blockquote>
+<p>Jsp</p>
+</blockquote>
+<p><em>Java Server Pages、Jsp实际上就是Servlet</em></p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>翻译(翻译为java文件、就是servlet) -&gt; 编译(编译为class文件) -&gt; 执行</p>
+<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><p>Servlet: 控制器、重点编写java代码逻辑(获取表单数据、处理业务逻辑、分发转向)<br>Jsp: 代码显示模板、重点在于显示数据</p>
+<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><ol>
+<li>&lt;% java代码 %&gt; //脚本</li>
+<li>&lt;%=2+3 %&gt; //等价于 out.print(2+3);</li>
+<li>&lt;%! %&gt; //声明、表示在类中定义全局成员和静态块</li>
+<li>&lt;%– 被注释的内容 –%&gt; //与html注释相比较,安全、省流量<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><em>Jsp指令是为Jsp引擎而设计的,它们并不直接产生任何可见输出,而只是告诉引擎如何处理JSP页面中的其余部分</em></li>
+<li><p>page指令:用于定义JSP页面的各种属性</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">import</span>=<span class="string">"java.util.*"</span> %&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>Include指令:<br>　　静态包含:把其它资源包含到当前页面中,在翻译时就把两个文件合并,优先使用</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">include</span> <span class="attr">file</span>=<span class="string">"/include/header.jsp"</span> %&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>　　动态包含:不会合并文件,当代码执行到include时,才包含另一个文件的内容<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">jsp:include</span> <span class="attr">page</span>=<span class="string">"/include/header.jsp"</span>&gt;</span><span class="tag">&lt;/<span class="name">jsp:include</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<ol>
+<li>taglib指令:在JSP页面中导入JSTL标签库。替换jsp中的java代码片段<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">taglib</span> <span class="attr">uri</span>=<span class="string">"http://java.sun.com/jsp/jstl/core"</span> <span class="attr">prefix</span>=<span class="string">"c"</span> %&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="动作"><a href="#动作" class="headerlink" title="动作"></a>动作</h3><pre><code>&lt;jsp:include &gt; 动态包含
+&lt;jsp:forward&gt; 请求转发
+&lt;jsp:param&gt; 设置请求参数
+&lt;jsp:useBean&gt; 创建一个对象
+&lt;jsp:setProperty&gt; 给指定的对象属性赋值
+&lt;jsp:getProperty&gt; 取出指定对象的属性值
+</code></pre><h3 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h3><p><em>指在Jsp的&lt;%=%&gt; 和&lt;% %&gt;中可以直接使用的对象</em><br>    request、session、application、pageContext、out、config、response、page、exception</p>
+<blockquote>
+<p>PageContext</p>
+</blockquote>
+<p>域对象、可以操作其它三个域对象(request session application)的数据<br>在普通类中可以通过PageContext获取其他JSP隐式对象,自定义标签时就使用<br>提供了的简易方法</p>
+<ol>
+<li>pageContext.forward(“2.jsp”);</li>
+<li>pageContext.include(“2.jsp”); </li>
+</ol>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setAttribute</span><span class="params">(String name,Object o)</span></span>;</div><div class="line"><span class="function">Object <span class="title">getAttribute</span><span class="params">(String name)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeAttribute</span><span class="params">(String name)</span></span>;</div></pre></td></tr></table></figure>
+<h3 id="操作其它域对象的方法"><a href="#操作其它域对象的方法" class="headerlink" title="操作其它域对象的方法"></a>操作其它域对象的方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setAttribute</span><span class="params">(String name,Object o，<span class="keyword">int</span> Scope)</span></span>;</div><div class="line"><span class="function">Object <span class="title">getAttribute</span><span class="params">(String name,<span class="keyword">int</span> Scope)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeAttribute</span><span class="params">(String name,<span class="keyword">int</span> Scope)</span></span>;</div></pre></td></tr></table></figure>
+<h3 id="scpoe的值"><a href="#scpoe的值" class="headerlink" title="scpoe的值"></a>scpoe的值</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">PageContext.PAGE_SCOPE </div><div class="line">PageContext.REQUEST_SCOPE </div><div class="line">PageContext.SESSION_SCOPE </div><div class="line">PageContext.APPLICATION_SCOPE</div></pre></td></tr></table></figure>
+<p>自动从page request session application依次查找,找到了就取值,结束查找<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">findAttribute(String name);</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>四大域对象实际使用</p>
+</blockquote>
+<pre><code>PageContext: pageConext 存放的数据在当前页面有效,开发时使用较少。
+ServletRequest: request  存放的数据在一次请求(转发)内有效,使用非常多
+HttpSession: session 存放的数据在一次会话中有效,使用的比较多,如:存放用户的登录信息,购物车功能等
+ServletContext: application 存放的数据在整个应用范围内都有效,因为范围太大,应尽量少用
+</code></pre><blockquote>
+<p>EL表达式</p>
+</blockquote>
+<p>用于简化jsp中java代码,不是一种开发语言,是jsp中获取数据的一种规范</p>
+<h3 id="获取数据"><a href="#获取数据" class="headerlink" title="获取数据"></a>获取数据</h3><p>只能获取存在4个作用域中的数据,获取对于null这样的数据，在页面中表现为空字符串</p>
+<ol>
+<li>${u} -&gt; pageContext.findAttribute(“u”);</li>
+<li>${param.name} -&gt; url?name=tom  </li>
+<li>${u.name} -&gt; u.getName();<h3 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h3></li>
+<li>empty: 判断null,空字符串和没有元素的集合(即使集合对象本身不为null)都返回true</li>
+<li>三元运算符 如: ${ empty list ? “为true” : “为false”}<h3 id="隐式对象"><a href="#隐式对象" class="headerlink" title="隐式对象"></a>隐式对象</h3>pageContext、pageScope、requestScope、sessionScope、applicationScope、cookie<br>param、paramValues、header、headerValues、initParam</li>
+</ol>
+<blockquote>
+<p>JSTL</p>
+</blockquote>
+<p><em>JSTL (JavaServerPages Standard Tag Library) JSP标准标签库</em><br>实现JSP页面中逻辑处理,如判断、循环等</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>在JSP页面添加taglib指令<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">taglib</span> <span class="attr">uri</span>=<span class="string">"http://java.sun.com/jsp/jstl/core"</span> <span class="attr">prefix</span>=<span class="string">"c"</span> %&gt;</span></div></pre></td></tr></table></figure></p>
+<p>使用JSTL标签<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">c:if</span> <span class="attr">test:</span>""&gt;</span><span class="tag">&lt;/<span class="name">c:if</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="常用标签-核心标签库"><a href="#常用标签-核心标签库" class="headerlink" title="常用标签(核心标签库)"></a>常用标签(核心标签库)</h3><ol>
+<li>通用标签: set、 out、 remove(变量设置、输出、移除)</li>
+<li>条件标签：if  choose 相当于if、switch(choose子标签when,相当于switch里的case)</li>
+<li>迭带标签：foreach: 普通循环、迭代</li>
+</ol>
 
       
     </div>
