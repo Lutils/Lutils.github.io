@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>CodeWars | Lutils</title>
+  <title>Java web基础(二) | Lutils</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录一些CodeWars上不错的题">
+  <meta name="description" content="事务/连接池/Listener/Filter/文件上传">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CodeWars">
-<meta property="og:url" content="http://lutils.cn/2016/11/01/codewars/index.html">
+<meta property="og:title" content="Java web基础(二)">
+<meta property="og:url" content="http://lutils.cn/2016/11/27/javaweb2/index.html">
 <meta property="og:site_name" content="Lutils">
-<meta property="og:description" content="记录一些CodeWars上不错的题">
-<meta property="og:updated_time" content="2016-11-09T10:21:22.444Z">
+<meta property="og:description" content="事务/连接池/Listener/Filter/文件上传">
+<meta property="og:updated_time" content="2016-11-27T06:05:25.879Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CodeWars">
-<meta name="twitter:description" content="记录一些CodeWars上不错的题">
+<meta name="twitter:title" content="Java web基础(二)">
+<meta name="twitter:description" content="事务/连接池/Listener/Filter/文件上传">
   
     <link rel="alternative" href="/atom.xml" title="Lutils" type="application/atom+xml">
   
@@ -135,7 +135,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-codewars" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-javaweb2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -145,7 +145,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      CodeWars
+      Java web基础(二)
     </h1>
   
 
@@ -153,19 +153,78 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>记录一些CodeWars上不错的题<br><a id="more"></a></p>
+        <p>事务/连接池/Listener/Filter/文件上传<br><a id="more"></a></p>
 <blockquote>
-<p>手机键盘按键次数问题</p>
+<p>事务</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Keypad</span> </span>&#123;</div><div class="line">  <span class="keyword">static</span> String[] keys = &#123;<span class="string">"1"</span>, <span class="string">"ABC2"</span>, <span class="string">"DEF3"</span>, <span class="string">"GHI4"</span>, <span class="string">"JKL5"</span>,</div><div class="line">                          <span class="string">"MNO6"</span>, <span class="string">"PQRS7"</span>, <span class="string">"TUV8"</span>, <span class="string">"WXYZ9"</span>, <span class="string">"*"</span>, <span class="string">" 0"</span>, <span class="string">"#"</span>&#125;;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">presses</span><span class="params">(String phrase)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> nPresses = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">char</span> c : phrase.toUpperCase().toCharArray())</div><div class="line">      <span class="keyword">for</span> (String s : keys)</div><div class="line">          nPresses += s.indexOf(c) + <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> nPresses;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>事务指逻辑上的一组操作,组成这组操作的各个单元,要么全部成功,要么全部不成功<br>事务的特性:原子性、一致性、隔离性、持久性</p>
+<h3 id="Mysql中的事务"><a href="#Mysql中的事务" class="headerlink" title="Mysql中的事务"></a>Mysql中的事务</h3><p>mysql支持事务、默认自动提交事务,每条语句都处在单独的事务中<br>手动控制事务</p>
+<ol>
+<li>开启事务：start transaction | begin</li>
+<li>提交事务：commit</li>
+<li>回滚事务：rollback</li>
+</ol>
 <blockquote>
-<p>数字降序排列</p>
+<p>连接池</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DescendingOrder</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">sortDesc</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> num)</span> </span>&#123;</div><div class="line">        <span class="keyword">char</span>[] c = String.valueOf(num).toCharArray();</div><div class="line">        java.util.Arrays.sort(c);</div><div class="line">        <span class="keyword">return</span> Integer.parseInt(<span class="keyword">new</span> StringBuffer(<span class="keyword">new</span> String(c)).reverse().toString());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>解决建立数据库连接耗费资源和时间很多的问题,提高性能,常用的数据源:DBCP、C3P0</p>
+<h3 id="DBCP"><a href="#DBCP" class="headerlink" title="DBCP"></a>DBCP</h3><p>Apache推出的Database Connection Pool<br>使用步骤</p>
+<ol>
+<li>添加jar包</li>
+<li>添加属性资源文件</li>
+<li>编写数据源工具类</li>
+</ol>
+<h3 id="C3P0"><a href="#C3P0" class="headerlink" title="C3P0"></a>C3P0</h3><p>使用步骤</p>
+<ol>
+<li>添加jar包 </li>
+<li>编写配置文件,c3p0-config.xml,放在classpath中,或classes目录中</li>
+</ol>
 <blockquote>
-<p>字符串依每一项中的数字进行排序</p>
+<p>Listener</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Order</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">order</span><span class="params">(String words)</span> </span>&#123;</div><div class="line">		String[] arr = words.split(<span class="string">" "</span>);</div><div class="line">		StringBuilder result = <span class="keyword">new</span> StringBuilder(<span class="string">""</span>);</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">			<span class="keyword">for</span> (String s : arr) &#123;</div><div class="line">				<span class="keyword">if</span> (s.contains(String.valueOf(i))) &#123;</div><div class="line">					result.append(s + <span class="string">" "</span>);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> result.toString().trim();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>用于监听web常见对象:HttpServletRequest/HttpSession/ServletContext<br>监听它们的创建与销毁/属性变化,监听session绑定javaBean</p>
+<blockquote>
+<p>Filter</p>
+</blockquote>
+<p>拦截所有访问web资源的请求或响应操作</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>创建一个类实现Filter接口</li>
+<li>重写接口中方法  doFilter方法是真正过滤的。</li>
+<li>在web.xml文件中配置<br>//在Filter的doFilter方法内如果没有执行chain.doFilter(request,response),那么资源不会被访问到</li>
+</ol>
+<h3 id="FilterChain"><a href="#FilterChain" class="headerlink" title="FilterChain"></a>FilterChain</h3><p>提供了对某一资源的已过滤请求调用链的视图<br>过滤器使用FilterChain调用链中的下一个过滤器,如果调用的过滤器是链中的最后一个过滤器,则调用链末尾的资源<br>//多个Filter对同一个资源进行拦截就可以形成Filter链、Filter的执行顺序由<filter-mapping>来确定</filter-mapping></p>
+<h3 id="FilterConfig"><a href="#FilterConfig" class="headerlink" title="FilterConfig"></a>FilterConfig</h3><p>Filter的配置对象,它可以完成下列功能</p>
+<ol>
+<li>获取Filtr名称</li>
+<li>获取Filter初始化参数</li>
+<li>获取ServletContext对象</li>
+</ol>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><ol>
+<li>当服务器启动,会创建Filter对象,并调用init方法,只调用一次</li>
+<li>当访问资源时,路径与Filter的拦截路径匹配,会执行Filter中的doFilter方法,这个方法是真正拦截操作的方法</li>
+<li>当服务器关闭时,会调用Filter的destroy方法来进行销毁操作</li>
+</ol>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;filter&gt;</div><div class="line">	&lt;filter-name&gt;filter名称&lt;/filter-name&gt;</div><div class="line">	&lt;filter-class&gt;Filter类的包名.类名&lt;/filter-class&gt;</div><div class="line">&lt;/filter&gt;</div><div class="line">&lt;filter-mapping&gt;</div><div class="line">	&lt;filter-name&gt;filter名称&lt;/filter-name&gt;</div><div class="line">	&lt;url-pattern&gt;路径&lt;/url-pattern&gt;</div><div class="line">&lt;/filter-mapping&gt;</div><div class="line">　</div><div class="line">&lt;servlet-name&gt;：对指定的servlet名称的servlet进行拦截</div><div class="line">&lt;dispatcher&gt;：可以取的值:REQUEST/FORWARD/ERROR/INCLUDE	</div><div class="line">1. REQUEST 当是从浏览器直接访问资源，或是重定向到某个资源时进行拦截方式配置的 它也是默认值</div><div class="line">2. FORWARD 它描述的是请求转发的拦截方式配置</div><div class="line">3. ERROR 如果目标资源是通过声明式异常处理机制调用时，那么该过滤器将被调用。除此之外，过滤器不会被调用。</div><div class="line">4. INCLUDE 如果目标资源是通过RequestDispatcher的include()方法访问时，那么该过滤器将被调用。除此之外，该过滤器不会被调用</div></pre></td></tr></table></figure>
+<blockquote>
+<p>文件上传</p>
+</blockquote>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><ol>
+<li>提供form表单,method为post</li>
+<li>form表单的enctype为multipart/form-data</li>
+<li>提供input type=”file”类的上传输入域</li>
+</ol>
+<h3 id="fileupload"><a href="#fileupload" class="headerlink" title="fileupload"></a>fileupload</h3><p>fileupload是由apache的commons组件提供的上传组件,帮我们解析request.getInputStream()<br>相关jar包</p>
+<ol>
+<li>commons-fileupload.jar  核心包</li>
+<li>commons-io.jar  依赖包<br>核心类<br>DiskFileItemFactory、ServletFileUpload、FileItem</li>
+</ol>
+<h3 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>创建工厂类DiskFileItemFactory对象<br>DiskFileItemFactory factory = new DiskFileItemFactory()</li>
+<li>使用工厂创建解析器对象<br>ServletFileUpload fileUpload = new ServletFileUpload(factory)</li>
+<li>使用解析器来解析request对象<br>List<fileitem> list = fileUpload.parseRequest(request)</fileitem></li>
+</ol>
+<p>FileItem对象对应一个表单项(表单字段),可以是文件字段或普通字段<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isFormField</span><span class="params">()</span> 判断当前表单字段是否为普通文本字段,如果返回<span class="keyword">false</span>,说明是文件字段</span></div><div class="line">String <span class="title">getFieldName</span><span class="params">()</span> 获取字段名称,例如：&lt;input type=”text” name=”username”/&gt;,返回的是<span class="function">username</span></div><div class="line">String <span class="title">getString</span><span class="params">()</span> 获取字段的内容,如果是文件字段,那么获取的是文件内容,当然上传的文件必须是文本文件</div><div class="line">String <span class="title">getName</span><span class="params">()</span> 获取文件字段的文件名称</div><div class="line">String <span class="title">getContentType</span><span class="params">()</span> 获取上传的文件的MIME类型,例如：text/plain</div><div class="line"><span class="keyword">int</span> <span class="title">getSize</span><span class="params">()</span> 获取上传文件的大小</div><div class="line">InputStream <span class="title">getInputStream</span><span class="params">()</span> 获取上传文件对应的输入流</div><div class="line"><span class="keyword">void</span> <span class="title">write</span><span class="params">(File)</span> 把上传的文件保存到指定文件中</div><div class="line"><span class="title">delete</span><span class="params">()</span> 删除临时文件</div></pre></td></tr></table></figure></p>
+
       
     </div>
     <div class="article-info article-info-index">
@@ -187,7 +246,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="codewars" data-title="CodeWars" data-url="http://lutils.cn/2016/11/01/codewars/"></div>
+	<div class="ds-thread" data-thread-key="javaweb2" data-title="Java web基础(二)" data-url="http://lutils.cn/2016/11/27/javaweb2/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
