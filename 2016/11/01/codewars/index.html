@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://lutils.cn/2016/11/01/codewars/index.html">
 <meta property="og:site_name" content="Lutils">
 <meta property="og:description" content="记录一些CodeWars上不错的题">
-<meta property="og:updated_time" content="2016-11-09T10:21:22.444Z">
+<meta property="og:updated_time" content="2016-11-28T11:53:33.034Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CodeWars">
 <meta name="twitter:description" content="记录一些CodeWars上不错的题">
@@ -166,6 +166,10 @@
 <p>字符串依每一项中的数字进行排序</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Order</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">order</span><span class="params">(String words)</span> </span>&#123;</div><div class="line">		String[] arr = words.split(<span class="string">" "</span>);</div><div class="line">		StringBuilder result = <span class="keyword">new</span> StringBuilder(<span class="string">""</span>);</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">			<span class="keyword">for</span> (String s : arr) &#123;</div><div class="line">				<span class="keyword">if</span> (s.contains(String.valueOf(i))) &#123;</div><div class="line">					result.append(s + <span class="string">" "</span>);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> result.toString().trim();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>最大子数组的数值和</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Max</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">sequence</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> m = <span class="number">0</span>, a = <span class="number">0</span>, s = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> e : arr) &#123;</div><div class="line">		  s += e;</div><div class="line">		  m = Math.min(s, m);</div><div class="line">		  a = Math.max(a, s - m);</div><div class="line">		&#125;</div><div class="line">    <span class="keyword">return</span> a;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
       
     </div>
     <div class="article-info article-info-index">
@@ -269,7 +273,7 @@
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/oj/" style="font-size: 20px;">oj</a> <a href="/tags/python/" style="font-size: 10px;">python</a>
+    				<a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/oj/" style="font-size: 15px;">oj</a> <a href="/tags/python/" style="font-size: 10px;">python</a>
     			</div>
     	</section>
     
