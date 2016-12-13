@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Hibernate | Lutils</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="关系数据库ORM框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hibernate">
+<meta property="og:url" content="http://lutils.cn/2016/12/11/hibernate/index.html">
+<meta property="og:site_name" content="Lutils">
+<meta property="og:description" content="关系数据库ORM框架">
+<meta property="og:updated_time" content="2016-12-13T03:42:40.798Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hibernate">
+<meta name="twitter:description" content="关系数据库ORM框架">
+  
+    <link rel="alternative" href="/atom.xml" title="Lutils" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <script src="/style.js"></script>
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="\assets\img\headimg.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Lutils</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/comments.html">留言板</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Lutils" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=SXB4eH58fH56cAk4OGcqJiQ" title="mail">mail</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Lutils</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="\assets\img\headimg.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Lutils</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/comments.html">留言板</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Lutils" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=SXB4eH58fH56cAk4OGcqJiQ" title="mail">mail</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-hibernate" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hibernate
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>关系数据库ORM框架<br><a id="more"></a></p>
+<blockquote>
+<p>配置文件</p>
+</blockquote>
+<h3 id="hibernate-cfg-xml"><a href="#hibernate-cfg-xml" class="headerlink" title="hibernate.cfg.xml"></a>hibernate.cfg.xml</h3><p>核心配置文件,基本配置如下</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="meta">&lt;!DOCTYPE hibernate-configuration PUBLIC</span></div><div class="line">	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"</div><div class="line">	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">hibernate-configuration</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">session-factory</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 数据库基本配置 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.driver_class"</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.username"</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.password"</span>&gt;</span>123456<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.url"</span>&gt;</span>jdbc:mysql://localhost:3306/mydb<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 控制台输出sql语句 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.show_sql"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 是否格式化sql语句 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"format_sql"</span>&gt;</span>false<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 自动生成表结构 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hbm2ddl.auto"</span>&gt;</span>update<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 数据库方言配置 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.dialect"</span>&gt;</span>org.hibernate.dialect.MySQLDialect<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 引入ORM 映射文件 填写src之后的路径 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">mapping</span> <span class="attr">resource</span>=<span class="string">"com/ljc/bean/User.hbm.xml"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">session-factory</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">hibernate-configuration</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="hbm-xml"><a href="#hbm-xml" class="headerlink" title="*.hbm.xml"></a>*.hbm.xml</h3><p>bean映射文件,与javabean放在同一个包下,*为bean的名称,如User.hbm.xml,基本配置如下</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="meta">&lt;!DOCTYPE hibernate-mapping PUBLIC </span></div><div class="line">    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"</div><div class="line">    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"&gt;</div><div class="line"><span class="comment">&lt;!-- ORM元数据 表对象关系映射文件 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span> <span class="attr">package</span>=<span class="string">"com.ljc.bean"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"User"</span> <span class="attr">table</span>=<span class="string">"user"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"native"</span>&gt;</span><span class="tag">&lt;/<span class="name">generator</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">column</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">column</span>=<span class="string">"password"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">class</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>常用Api</p>
+</blockquote>
+<h3 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h3><p>构造:        //无参的configure()默认加载src根目录下的hibernate.cfg.xml,有参的为加载指定目录<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Configuration config = <span class="keyword">new</span> Configuration().configure();</div></pre></td></tr></table></figure></p>
+<h3 id="SessionFactory"><a href="#SessionFactory" class="headerlink" title="SessionFactory"></a>SessionFactory</h3><p>类似于JDBC连接池,用于管理所有session<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SessionFactory sessionFactory = config.buildSessionFactory();</div></pre></td></tr></table></figure></p>
+<p>sessionFactory缓存配置信息:数据库配置信息、映射文件、预定义HQL语句 等<br>其线程安全,可以是成员变量,多个线程同时访问时,不会出现线程并发访问问题。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获得新的session</span></div><div class="line">sessionFactory.openSession();</div><div class="line"><span class="comment">//获得当前线程中绑定的session</span></div><div class="line">sessionFactory.getCurrentSession();</div></pre></td></tr></table></figure></p>
+<p>hibernate支持将创建的session绑定到本地线程中,底层使用ThreadLocal,在程序之间共享session。<br>但必须在hibernate.cfg.xml 配置以下属性才可使用getCurrentSession()<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.current_session_context_class"</span>&gt;</span>thread<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><p>实现数据库的增删改查,单线程,线程不安全,不能编写成员变量</p>
+<p>插入操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建对象</span></div><div class="line">User user = <span class="keyword">new</span> User();</div><div class="line">user.setId(<span class="number">123</span>);</div><div class="line">user.setName(<span class="string">"LJC"</span>);</div><div class="line">user.setPassword(<span class="string">"123456"</span>);</div><div class="line"><span class="comment">//保存</span></div><div class="line">session.save(user);</div></pre></td></tr></table></figure>
+<p>删除操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//通过id查询出要删除的对象</span></div><div class="line">User user = (User) session.get(User.class,<span class="number">1</span>);</div><div class="line"><span class="comment">//删除</span></div><div class="line">session.delete(user);</div></pre></td></tr></table></figure>
+<p>更新操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 通过id查询出要修改的对象</span></div><div class="line">User user = (User) session.get(User.class, <span class="number">1</span>);</div><div class="line"><span class="comment">// 在查询结果上,进行修改</span></div><div class="line">user.setName(<span class="string">"ljc"</span>);</div><div class="line"><span class="comment">//更新</span></div><div class="line">session.update(user);</div></pre></td></tr></table></figure>
+<p>查询操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//get方式通过id查询(方法被调用时立刻发送sql语句查询)</span></div><div class="line">User user1 = (User) session.get(User.class,<span class="number">1</span>);</div><div class="line"><span class="comment">//load方式通过id查询(调用时并没有查询数据库,当我们需要使用该对象的时候,才查询数据)</span></div><div class="line">User user2 = (User) session.load(User.class,<span class="number">1</span>);</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//HQL方式</span></div><div class="line">Query query = session.createQuery(<span class="string">"from com.ljc.bean.User"</span>);</div><div class="line">List&lt;User&gt; list =  query.list();</div><div class="line"><span class="comment">//Criteria方式</span></div><div class="line">Criteria criteria = session.createCriteria(User.class);</div><div class="line">List&lt;User&gt; list1 = criteria.list();</div><div class="line">		</div><div class="line"><span class="comment">//原生sql方式</span></div><div class="line">SQLQuery query1 = session.createSQLQuery(<span class="string">"select * from user"</span>);</div><div class="line"><span class="comment">// addEntity 将查询结果封装到指定对象中</span></div><div class="line">query1.addEntity(User.class);</div><div class="line">List&lt;User&gt; list2 = query.list();</div></pre></td></tr></table></figure>
+<h3 id="Transaction"><a href="#Transaction" class="headerlink" title="Transaction"></a>Transaction</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//打开事务</span></div><div class="line">Transaction ts = session.beginTransaction();</div><div class="line"><span class="comment">//提交事务</span></div><div class="line">ts.commit();</div><div class="line"><span class="comment">//回滚事务</span></div><div class="line">ts.rollback();</div><div class="line"><span class="comment">//获得已经打开的事务对象</span></div><div class="line">session.getTransaction();</div></pre></td></tr></table></figure>
+<p>如果提交或回滚事务,底层将自动关闭session</p>
+<h3 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h3><p>封装HQL语句</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//封装HQL</span></div><div class="line">Query query = session.createQuery(<span class="string">"from com.ljc.bean.User"</span>);</div><div class="line"><span class="comment">//将HQL语句执行,并返回结果(多行)</span></div><div class="line">query.list();</div><div class="line"><span class="comment">//将HQL语句执行,并返回结果(一行)</span></div><div class="line">query.uniqueResult();</div><div class="line"><span class="comment">//分页 </span></div><div class="line"><span class="comment">//开始索引数startIndex</span></div><div class="line">query.setFirstResult(<span class="number">0</span>);</div><div class="line"><span class="comment">//每页显示个数 pageSize</span></div><div class="line">query.setMaxResults(<span class="number">2</span>);</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+	  
+	  
+	  
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="hibernate" data-title="Hibernate" data-url="http://lutils.cn/2016/12/11/hibernate/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"lutils"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+
+    <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div>
+    		&copy; 2016 Lutils
+    	</div>
+		
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+
+
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/oj/" style="font-size: 15px;">oj</a> <a href="/tags/python/" style="font-size: 10px;">python</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://lutils.github.io/">友链</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
