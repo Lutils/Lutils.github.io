@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Collection集合(一) | Lutils</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="HashMap/HashSet/HashTable">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Collection集合(一)">
+<meta property="og:url" content="http://lutils.cn/2017/03/11/hash/index.html">
+<meta property="og:site_name" content="Lutils">
+<meta property="og:description" content="HashMap/HashSet/HashTable">
+<meta property="og:image" content="http://lutils.cn/assets/img/hashmap.png">
+<meta property="og:image" content="http://lutils.cn/assets/img/hashmaptotree.png">
+<meta property="og:updated_time" content="2017-03-11T16:35:41.098Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Collection集合(一)">
+<meta name="twitter:description" content="HashMap/HashSet/HashTable">
+<meta name="twitter:image" content="http://lutils.cn/assets/img/hashmap.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Lutils" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <script src="/style.js"></script>
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="\assets\img\headimg.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Lutils</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/comments.html">留言板</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Lutils" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=SSU8PSAlOgk4OGcqJiQ" title="mail">mail</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Lutils</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="\assets\img\headimg.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Lutils</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/comments.html">留言板</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Lutils" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=SSU8PSAlOgk4OGcqJiQ" title="mail">mail</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-hash" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Collection集合(一)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>HashMap/HashSet/HashTable<br><a id="more"></a></p>
+<blockquote>
+<p>HashMap</p>
+</blockquote>
+<p>存储＜K,V＞的容器，并且保证其中的K是唯一的(可以为null)，线程不安全</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>继承AbstractMap，实现Map<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;, <span class="title">Cloneable</span>, <span class="title">Serializable</span></span></div></pre></td></tr></table></figure></p>
+<h3 id="底层存储"><a href="#底层存储" class="headerlink" title="底层存储"></a>底层存储</h3><p>Java8中，HashMap底层实际上是基于一个Node<k,v>类型的数组<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">transient</span> Node&lt;K,V&gt;[] table;</div></pre></td></tr></table></figure></k,v></p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 默认初始容量(即桶的数量): 16</div><div class="line"> */</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">4</span>;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 最大容量</div><div class="line"> */</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAXIMUM_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">30</span>;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 默认装载因子</div><div class="line"> * 此值表示当前容量的HashMap装entry满的程度，当entry数量大于当前容量与装载因子的</div><div class="line"> * 乘积时，HashMap就会进行rehash操作。</div><div class="line"> * 也就是HashMap会扩充容量，扩充容量之后整个HashMap就会重建</div><div class="line"> */</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="number">0.75f</span>;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 当桶中的元素大于此阀值时使用树代替单向链表，即红黑树</div><div class="line"> */</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TREEIFY_THRESHOLD = <span class="number">8</span>;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 当桶中的元素小于此阀值时，树转成单向链表</div><div class="line"> */</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNTREEIFY_THRESHOLD = <span class="number">6</span>;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * HashMap中所有元素总数小于此值时，即使桶中元素超过TREEIFY_THRESHOLD，也不转成树</div><div class="line"> */</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MIN_TREEIFY_CAPACITY = <span class="number">64</span>;</div></pre></td></tr></table></figure>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">	</div><div class="line"><span class="comment">//默认构造方法，装载因子设置为默认值0.75</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">()</span></span></div><div class="line"></div><div class="line"><span class="comment">//指定初始容量和加载因子</span></div><div class="line"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span></div><div class="line"></div><div class="line"><span class="comment">//指定初始容量</span></div><div class="line"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span></div><div class="line"></div><div class="line"><span class="comment">//使用一个Map来初始化一个HashMap</span></div><div class="line"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(Map&lt;? extends K, ? extends V&gt; m)</span></div></pre></td></tr></table></figure>
+<h3 id="底层存储结构"><a href="#底层存储结构" class="headerlink" title="底层存储结构"></a>底层存储结构</h3><p><img src="/assets/img/hashmap.png" alt=""></p>
+<p>resize与树化的缘由：随着结点的增多，单个桶中的元素越来越大，即链表的长度越来越长，导致链表的相关操作的性能越来越差</p>
+<h3 id="resize"><a href="#resize" class="headerlink" title="resize"></a>resize</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 当HashMap的size达到此值时就要进行resize操作</div><div class="line"> * 计算方式: capacity * load factor // 即容量*装填因子</div><div class="line"> */</div><div class="line"><span class="keyword">int</span> threshold;</div></pre></td></tr></table></figure>
+<p>具体resize方法可查看具体源码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> Node&lt;K, V&gt;[] resize()</div></pre></td></tr></table></figure></p>
+<p>容量不能超过MAXIMUM_CAPACITY上限，新容量为旧容量的2倍，新阀值为旧阀值的2倍</p>
+<h3 id="树化"><a href="#树化" class="headerlink" title="树化"></a>树化</h3><p>当HashMap的容量大于MIN_TREEIFY_CAPACITY 并且桶中元素数量大于等于TREEIFY_THRESHOLD 时，<br>该桶中的元素结构就会由链表结构转成树结构以提高性能</p>
+<p>具体可查看树化函数源码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//保证桶中元素和HashMap容量同时满足条件才对相应桶进行树化，否则只进行resize操作</span></div><div class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">treeifyBin</span><span class="params">(Node&lt;K,V&gt;[] tab, <span class="keyword">int</span> hash)</span></span></div><div class="line"><span class="comment">//具体树化算法</span></div><div class="line"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">treeify</span><span class="params">(Node&lt;K,V&gt;[] tab)</span></div></pre></td></tr></table></figure></p>
+<p>把链表中每个结点都替换成树结点，实际上是创建一个新链表，结点类型由Node变为TreeNode<br><img src="/assets/img/hashmaptotree.png" alt=""></p>
+<h3 id="put-key-vlaue"><a href="#put-key-vlaue" class="headerlink" title="put(key,vlaue)"></a>put(key,vlaue)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> putVal(hash(key), key, value, <span class="keyword">false</span>, <span class="keyword">true</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">final</span> V <span class="title">putVal</span><span class="params">(<span class="keyword">int</span> hash, K key, V value, <span class="keyword">boolean</span> onlyIfAbsent,</span></span></div><div class="line">			   <span class="keyword">boolean</span> evict) &#123;</div><div class="line">	Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; <span class="keyword">int</span> n, i;</div><div class="line">	<span class="comment">// 如果Node节点数组为空或者节点数目为0，则进行resize操作</span></div><div class="line">	<span class="keyword">if</span> ((tab = table) == <span class="keyword">null</span> || (n = tab.length) == <span class="number">0</span>)</div><div class="line">		n = (tab = resize()).length;</div><div class="line">	<span class="comment">// 通过(n-1)&amp;hash查找hash表中的数组索引，该计算方式可保证查找的位置不会大于数组长度</span></div><div class="line">	<span class="comment">// 若为null，则在该索引位置创建新的节点</span></div><div class="line">	<span class="keyword">if</span> ((p = tab[i = (n - <span class="number">1</span>) &amp; hash]) == <span class="keyword">null</span>)</div><div class="line">		tab[i] = newNode(hash, key, value, <span class="keyword">null</span>);</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		Node&lt;K,V&gt; e; K k;</div><div class="line">		<span class="comment">// 要查询的节点已存在，直接覆盖value</span></div><div class="line">		<span class="keyword">if</span> (p.hash == hash &amp;&amp;</div><div class="line">			((k = p.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</div><div class="line">			e = p;</div><div class="line">		<span class="comment">// 红黑树情况，则调用红黑树中的putTreeVal方法获取要查询的节点</span></div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (p <span class="keyword">instanceof</span> TreeNode)</div><div class="line">			e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(<span class="keyword">this</span>, tab, hash, key, value);</div><div class="line">		<span class="comment">// 链表情况</span></div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> binCount = <span class="number">0</span>; ; ++binCount) &#123;</div><div class="line">				<span class="keyword">if</span> ((e = p.next) == <span class="keyword">null</span>) &#123;</div><div class="line">				    <span class="comment">// e为空，表示已到表尾也没有找到key值相同节点，则新建节点</span></div><div class="line">					p.next = newNode(hash, key, value, <span class="keyword">null</span>);</div><div class="line">					<span class="comment">// 链表长度 &gt;= TREEIFY_THRESHOLD - 1，改为红黑树存储</span></div><div class="line">					<span class="keyword">if</span> (binCount &gt;= TREEIFY_THRESHOLD - <span class="number">1</span>)</div><div class="line">						treeifyBin(tab, hash);</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				&#125;</div><div class="line">				<span class="comment">// key已经存在直接覆盖value</span></div><div class="line">				<span class="keyword">if</span> (e.hash == hash &amp;&amp;</div><div class="line">					((k = e.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				p = e;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//更新hash值和key值均相同的节点Value值</span></div><div class="line">		<span class="keyword">if</span> (e != <span class="keyword">null</span>) &#123; </div><div class="line">			V oldValue = e.value;</div><div class="line">			<span class="keyword">if</span> (!onlyIfAbsent || oldValue == <span class="keyword">null</span>)</div><div class="line">				e.value = value;</div><div class="line">			afterNodeAccess(e);</div><div class="line">			<span class="keyword">return</span> oldValue;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//修改次数增加1  </span></div><div class="line">	++modCount;</div><div class="line">	<span class="comment">//超过最大容量，resize()扩容操作</span></div><div class="line">	<span class="keyword">if</span> (++size &gt; threshold)</div><div class="line">		resize();</div><div class="line">	afterNodeInsertion(evict);</div><div class="line">	<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="get-Object-key"><a href="#get-Object-key" class="headerlink" title="get(Object key)"></a>get(Object key)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> V <span class="title">get</span><span class="params">(Object key)</span> </span>&#123;</div><div class="line">	Node&lt;K,V&gt; e;</div><div class="line">	<span class="keyword">return</span> (e = getNode(hash(key), key)) == <span class="keyword">null</span> ? <span class="keyword">null</span> : e.value;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">final</span> Node&lt;K,V&gt; <span class="title">getNode</span><span class="params">(<span class="keyword">int</span> hash, Object key)</span> </span>&#123;</div><div class="line">	Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; <span class="keyword">int</span> n; K k;</div><div class="line">	<span class="comment">//(n - 1) &amp; hash得到对象的保存位</span></div><div class="line">	<span class="keyword">if</span> ((tab = table) != <span class="keyword">null</span> &amp;&amp; (n = tab.length) &gt; <span class="number">0</span> &amp;&amp;</div><div class="line">		(first = tab[(n - <span class="number">1</span>) &amp; hash]) != <span class="keyword">null</span>) &#123;</div><div class="line">		<span class="keyword">if</span> (first.hash == hash &amp;&amp; <span class="comment">// always check first node</span></div><div class="line">			((k = first.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</div><div class="line">			<span class="keyword">return</span> first;</div><div class="line">		<span class="keyword">if</span> ((e = first.next) != <span class="keyword">null</span>) &#123;</div><div class="line">		    <span class="comment">//红黑树情况</span></div><div class="line">			<span class="keyword">if</span> (first <span class="keyword">instanceof</span> TreeNode)</div><div class="line">				<span class="keyword">return</span> ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);</div><div class="line">			<span class="comment">//链表情况</span></div><div class="line">			<span class="keyword">do</span> &#123;</div><div class="line">				<span class="keyword">if</span> (e.hash == hash &amp;&amp;</div><div class="line">					((k = e.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</div><div class="line">					<span class="keyword">return</span> e;</div><div class="line">			&#125; <span class="keyword">while</span> ((e = e.next) != <span class="keyword">null</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>HashSet</p>
+</blockquote>
+<p>元素唯一且无序</p>
+<h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>继承AbstractSet，实现Set<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashSet</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractSet</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">Set</span>&lt;<span class="title">E</span>&gt;, <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></span></div></pre></td></tr></table></figure></p>
+<h3 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">transient</span> HashMap&lt;E,Object&gt; map;</div><div class="line"><span class="comment">// Dummy value to associate with an Object in the backing Map</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object PRESENT = <span class="keyword">new</span> Object();</div></pre></td></tr></table></figure>
+<h3 id="构造函数-1"><a href="#构造函数-1" class="headerlink" title="构造函数"></a>构造函数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">()</span> </span>&#123;</div><div class="line">	map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</div><div class="line">	map = <span class="keyword">new</span> HashMap&lt;&gt;(Math.max((<span class="keyword">int</span>) (c.size()/.<span class="number">75f</span>) + <span class="number">1</span>, <span class="number">16</span>));</div><div class="line">	addAll(c);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span> </span>&#123;</div><div class="line">	map = <span class="keyword">new</span> HashMap&lt;&gt;(initialCapacity, loadFactor);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</div><div class="line">	map = <span class="keyword">new</span> HashMap&lt;&gt;(initialCapacity);</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 底层使用LinkedHashMap，其他几个都是HashMap</div><div class="line"> * dummy参数，仅仅是为了区别于上面第3个构造方法</div><div class="line"> * 访问权限是包权限，不对外公开，实际上这个构造方法在LinkedHashSet被使用到</div><div class="line"> */</div><div class="line">HashSet(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor, <span class="keyword">boolean</span> dummy) &#123;</div><div class="line">	map = <span class="keyword">new</span> LinkedHashMap&lt;&gt;(initialCapacity, loadFactor);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><p>基本都是基于HashMap的操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> *往集合中新增元素，map.put(e, PRESENT)会返回map中插入前旧的value，即如果key已经存在，</div><div class="line"> *那么返回PRESENT否则返回NULL。从这里可以看出，如果新增的key已存在add方法会返回false。</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> map.put(e, PRESENT) == <span class="keyword">null</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//删除集合中的元素，返回删除的元素，如果删除的元素不存在则返回false</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> map.remove(o) == PRESENT;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//迭代器</span></div><div class="line"><span class="function"><span class="keyword">public</span> Iterator&lt;E&gt; <span class="title">iterator</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> map.keySet().iterator();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>HashTable</p>
+</blockquote>
+<p>与HashMap相比，HashTable中的key和value都不允许为null，线程安全</p>
+<h3 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h3><p>继承Dictionary，实现Map<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hashtable</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">Dictionary</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;, <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></span></div></pre></td></tr></table></figure></p>
+<p>具体内部实现，参阅源码。。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+	  
+	  
+	  
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="hash" data-title="Collection集合(一)" data-url="http://lutils.cn/2017/03/11/hash/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"lutils"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+
+    <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div>
+    		&copy; 2017 Lutils
+    	</div>
+		
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+
+
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/oj/" style="font-size: 13.33px;">oj</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.anneke.cn/">卷猫</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
