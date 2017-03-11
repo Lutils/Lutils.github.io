@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>设计模式(一) | Lutils</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="单例/工厂/Builder/原型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式(一)">
+<meta property="og:url" content="http://lutils.cn/2017/03/10/dp/index.html">
+<meta property="og:site_name" content="Lutils">
+<meta property="og:description" content="单例/工厂/Builder/原型">
+<meta property="og:updated_time" content="2017-03-11T08:47:09.652Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式(一)">
+<meta name="twitter:description" content="单例/工厂/Builder/原型">
+  
+    <link rel="alternative" href="/atom.xml" title="Lutils" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <script src="/style.js"></script>
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="\assets\img\headimg.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Lutils</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/comments.html">留言板</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Lutils" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=SSU8PSAlOgk4OGcqJiQ" title="mail">mail</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Lutils</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="\assets\img\headimg.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Lutils</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/comments.html">留言板</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Lutils" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=SSU8PSAlOgk4OGcqJiQ" title="mail">mail</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-dp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      设计模式(一)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>单例/工厂/Builder/原型<br><a id="more"></a></p>
+<blockquote>
+<p>单例模式</p>
+</blockquote>
+<p>构造函数设置为private、通过静态方法或枚举返回单例对象<br>确保单例对象有且只有一个(尤其是多线程环境)、且反序列化时不会重新构建对象</p>
+<p>-&gt;构造函数私有化-&gt;暴露公共静态方法-&gt;确保线程安全</p>
+<h3 id="饿汉模式"><a href="#饿汉模式" class="headerlink" title="饿汉模式"></a>饿汉模式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton1</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">// 构造函数私有化</span></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Singleton1</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">	<span class="comment">// 共有静态方法、暴露获取单例对象接口</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton1 instance = <span class="keyword">new</span> Singleton1();</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton1 <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> instance;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="懒汉模式"><a href="#懒汉模式" class="headerlink" title="懒汉模式"></a>懒汉模式</h3><p>优点:单例只有在使用时才会被实例化<br>缺点:第一次加载时反应稍慢;每次调用getInstance都进行同步,造成不必要的同步开销</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton2</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton2 instance;</div><div class="line">	<span class="comment">// 构造函数私有化</span></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Singleton2</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">	<span class="comment">//添加了synchronized关键字,保证多线程单例对象唯一</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton2 <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</div><div class="line">			instance = <span class="keyword">new</span> Singleton2();</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> instance;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Double-Check-Lock-DCL-模式"><a href="#Double-Check-Lock-DCL-模式" class="headerlink" title="Double Check Lock(DCL)模式"></a>Double Check Lock(DCL)模式</h3><p>优点:解决了懒汉模式的大部分缺点、资源利用率高<br>缺点:第一次加载时反应稍慢              </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton3</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton3 instance = <span class="keyword">null</span>;</div><div class="line">	<span class="comment">// 构造函数私有化</span></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Singleton3</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton3 <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">//第一次判空:避免不必要的同步</span></div><div class="line">		<span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">synchronized</span> (Singleton3.class) &#123;</div><div class="line">				<span class="comment">//第二次判空:创建实例</span></div><div class="line">				<span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</div><div class="line">					instance = <span class="keyword">new</span> Singleton3();</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> instance;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="静态内部类模式"><a href="#静态内部类模式" class="headerlink" title="静态内部类模式"></a>静态内部类模式</h3><p>优点:确保线程安全、保证单例、延迟了单例的实例化          </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton4</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">// 构造函数私有化</span></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Singleton4</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton4 <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> SingletonHolder.instance;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 静态内部类</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolder</span></span>&#123;</div><div class="line">		<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton4 instance = <span class="keyword">new</span> Singleton4();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上单例方法在反序列化情况需加入以下方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> Object <span class="title">readResolve</span><span class="params">()</span> <span class="keyword">throws</span> ObjectStreamException </span>&#123;</div><div class="line">	<span class="comment">//反序列化直接返回对象,而不是生成新对象</span></div><div class="line">	<span class="keyword">return</span> instance;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>因为序列化可以将一个单例的实例对象写入磁盘,然后再读出来,从而有效的获取一个实例,<br>即使构造函数私有,反序列化依旧可以通过特殊途径获得新的实例</p>
+<h3 id="枚举单例"><a href="#枚举单例" class="headerlink" title="枚举单例"></a>枚举单例</h3><p>线程安全且单例,反序列化情况也不会生成新的实例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Singleton &#123;</div><div class="line">	INSTANCE;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>工厂模式</p>
+</blockquote>
+<h3 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h3><p>定义一个用于创建对象的接口,让子类决定实例化那个类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 产品抽象类</div><div class="line"> */</div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Product</span></span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 工厂抽象类</div><div class="line"> */</div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Factory</span></span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Product <span class="title">createProduct</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 工厂方法</div><div class="line"> * 通过不同的返回值生产A或B (A/B为继承自Product的类)</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyFactory</span> <span class="keyword">extends</span> <span class="title">Factory</span></span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Product <span class="title">createProduct</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ProductA();	</div><div class="line"><span class="comment">//		return new ProductB();  </span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 简单工厂</div><div class="line"> * 使用场景:工厂只有一个的时候</div><div class="line"> */ </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SimpleFactory</span></span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Product <span class="title">createProduct</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ProductA();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h3><p>为创建一组相关或者是相互依赖的对象创建一组接口,而不需要指定他们的具体类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 抽象工厂</div><div class="line"> */</div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractFactroy</span> </span>&#123;</div><div class="line">	<span class="comment">//创建产品A</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> AbstractProudctA <span class="title">createProductA</span><span class="params">()</span></span>;</div><div class="line">	<span class="comment">//创建产品B</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> AbstractProudctB <span class="title">createProductB</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 生产产品1</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyFactory1</span> <span class="keyword">extends</span> <span class="title">AbstractFactroy</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> AbstractProudctA <span class="title">createProductA</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ProductA1();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> AbstractProudctB <span class="title">createProductB</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ProductB1();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 生产产品2</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyFactory2</span> <span class="keyword">extends</span> <span class="title">AbstractFactroy</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> AbstractProudctA <span class="title">createProductA</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ProductA2();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> AbstractProudctB <span class="title">createProductB</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ProductB2();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Builder模式</p>
+</blockquote>
+<p>将一个复杂对象的构建与他的表示分离，使得同样的构建过程可以创建不同的表示</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 抽象Builder类</div><div class="line"> */</div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Builder</span> </span>&#123;</div><div class="line">	<span class="comment">// 设置主机</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Builder <span class="title">setBoard</span><span class="params">(String board)</span></span>;</div><div class="line">	<span class="comment">// 设置显示器</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Builder <span class="title">setDisplay</span><span class="params">(String display)</span></span>;</div><div class="line">	<span class="comment">// 设置操作系统</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Builder <span class="title">setOS</span><span class="params">(String os)</span></span>;</div><div class="line">	<span class="comment">// 创建computer</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Computer <span class="title">build</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 具体Builder类</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MacBookBuilder</span> <span class="keyword">extends</span> <span class="title">Builder</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> Computer mac = <span class="keyword">new</span> MacBook();</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Builder <span class="title">setBoard</span><span class="params">(String board)</span> </span>&#123;</div><div class="line">		mac.setBoard(board);</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Builder <span class="title">setDisplay</span><span class="params">(String display)</span> </span>&#123;</div><div class="line">		mac.setDisplay(display);</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Builder <span class="title">setOS</span><span class="params">(String os)</span> </span>&#123;</div><div class="line">		mac.setOs(os);</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Computer <span class="title">build</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> mac;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 链式调用</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Computer mac = <span class="keyword">new</span> MacBookBuilder()</div><div class="line">				.setBoard(<span class="string">"core"</span>)</div><div class="line">				.setDisplay(<span class="string">"retina"</span>)</div><div class="line">				.setOS(<span class="string">"mac os"</span>)</div><div class="line">				.build();</div><div class="line">		System.out.println(mac);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><p>用原型实例指定创建对象的种类，并通过拷贝这些原型，创建新对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Prototype</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> Prototype <span class="title">clone</span><span class="params">()</span> </span>&#123;</div><div class="line">		Prototype prototype = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			prototype = (Prototype) <span class="keyword">super</span>.clone();</div><div class="line">		&#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> prototype;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+	  
+	  
+	  
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="dp" data-title="设计模式(一)" data-url="http://lutils.cn/2017/03/10/dp/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"lutils"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+
+    <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div>
+    		&copy; 2017 Lutils
+    	</div>
+		
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+
+
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/oj/" style="font-size: 15px;">oj</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.anneke.cn/">卷猫</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
