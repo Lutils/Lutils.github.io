@@ -6,16 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>ThreadLocal | Lutils</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="提供了保持对象的方法和避免参数传递的方便的对象访问方式">
+  <meta name="description" content="提供了保持对象的方法和避免参数传递的对象访问方式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ThreadLocal">
 <meta property="og:url" content="http://lutils.cn/2017/03/14/threadlocal/index.html">
 <meta property="og:site_name" content="Lutils">
-<meta property="og:description" content="提供了保持对象的方法和避免参数传递的方便的对象访问方式">
-<meta property="og:updated_time" content="2017-03-14T08:17:45.681Z">
+<meta property="og:description" content="提供了保持对象的方法和避免参数传递的对象访问方式">
+<meta property="og:updated_time" content="2017-03-14T08:26:28.187Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ThreadLocal">
-<meta name="twitter:description" content="提供了保持对象的方法和避免参数传递的方便的对象访问方式">
+<meta name="twitter:description" content="提供了保持对象的方法和避免参数传递的对象访问方式">
   
     <link rel="alternative" href="/atom.xml" title="Lutils" type="application/atom+xml">
   
@@ -153,7 +153,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>提供了保持对象的方法和避免参数传递的方便的对象访问方式<br><a id="more"></a></p>
+        <p>提供了保持对象的方法和避免参数传递的对象访问方式<br><a id="more"></a></p>
 <blockquote>
 <p>常用方法</p>
 </blockquote>
@@ -169,6 +169,9 @@
 <p>然后在当前线程里面，就可以通过get方法在threadLocals里面查找</p>
 <h3 id="典型应用"><a href="#典型应用" class="headerlink" title="典型应用"></a>典型应用</h3><p>hibernate中典型的ThreadLocal的应用：Session管理</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ThreadLocal threadSession = <span class="keyword">new</span> ThreadLocal();  </div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Session <span class="title">getSession</span><span class="params">()</span> <span class="keyword">throws</span> InfrastructureException </span>&#123;  </div><div class="line">    <span class="comment">//这个session相当于线程的私有变量，各个线程只能取到自己的ThreadLocalMap中的东西</span></div><div class="line">    Session s = (Session) threadSession.get();  </div><div class="line">    <span class="keyword">try</span> &#123;  </div><div class="line">        <span class="keyword">if</span> (s == <span class="keyword">null</span>) &#123;  </div><div class="line">            <span class="comment">//当前线程没有session，则创建一个session，再set到线程中</span></div><div class="line">            <span class="comment">//实际是放到当前线程的ThreadLocalMap这个map中</span></div><div class="line">            s = getSessionFactory().openSession();  </div><div class="line">            threadSession.set(s);  </div><div class="line">        &#125;  </div><div class="line">    &#125; <span class="keyword">catch</span> (HibernateException ex) &#123;  </div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> InfrastructureException(ex);  </div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">return</span> s;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>ThreadLocal不是用来解决共享对象的多线程访问问题的，<br>通常，通过ThreadLocal.set()到线程中的对象是该线程自己使用的对象，其他线程无法访问</p>
+<p>ThreadLocal使得各线程能够保持各自独立的一个对象，并不是通过ThreadLocal.set()来实现的，<br>而是通过每个线程中的new对象 的操作来创建的对象，每个线程创建一个，不是对象的拷贝或副本，</p>
+<p>通过ThreadLocal.set()将这个新创建的对象的引用保存到各线程的自己的一个map中，<br>每个线程都有这样一个map，执行ThreadLocal.get()时，各线程从自己的map中取出放进去的对象，<br>因此取出来的是各自自己线程中的对象，ThreadLocal实例是作为map的key来使用的</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>每个线程中都有一个自己的ThreadLocalMap类对象，可以将线程自己的对象保持到其中，各管各的，线程可以正确的访问到自己的对象。 </p>
 <p>将一个共用的ThreadLocal静态实例作为key，将不同对象的引用保存到不同线程的ThreadLocalMap中，<br>然后在线程执行的各处通过这个静态ThreadLocal实例的get()方法取得自己线程保存的那个对象，避免了将这个对象作为参数传递。 </p>
 
