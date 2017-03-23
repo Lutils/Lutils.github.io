@@ -4,14 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Archives | Lutils</title>
+  <title>Java内存模型 | Lutils</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Lutils">
-<meta property="og:url" content="http://lutils.cn/archives/index.html">
+  <meta name="description" content="Java Memory Model">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java内存模型">
+<meta property="og:url" content="http://lutils.cn/2017/03/23/jmm/index.html">
 <meta property="og:site_name" content="Lutils">
+<meta property="og:description" content="Java Memory Model">
+<meta property="og:updated_time" content="2017-03-23T14:58:28.519Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lutils">
+<meta name="twitter:title" content="Java内存模型">
+<meta name="twitter:description" content="Java Memory Model">
   
     <link rel="alternative" href="/atom.xml" title="Lutils" type="application/atom+xml">
   
@@ -131,186 +135,93 @@
 </nav>
 
       <div class="body-wrap">
+        <article id="post-jmm" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
   
+    <h1 class="article-title" itemprop="name">
+      Java内存模型
+    </h1>
   
+
+      </header>
     
-    
+    <div class="article-entry" itemprop="articleBody">
       
+        <p>Java Memory Model<br><a id="more"></a><br>在Java中，采用共享内存模型来实现多线程之间的信息交换和数据同步，线程之间通过共享程序公共的状态，<br>读写内存中公共状态的方式来进行隐式通信，因此存在内存可见性的问题</p>
+<blockquote>
+<p>happens-before原则</p>
+</blockquote>
+<p>在JMM中，若操作A的执行结果需要对操作B可见，那么A与B之间须存在happens-before关系<br>两个操作之间具有happens-before关系，并不意味前一个操作必须要在后一个操作之前执行，<br>仅要求前一个操作的执行结果，对于后一个操作是可见的，且前一个操作按顺序排在后一个操作之前</p>
+<h3 id="常见关系"><a href="#常见关系" class="headerlink" title="常见关系"></a>常见关系</h3><ol>
+<li>程序顺序规则：一个线程中的每个操作，happens-before于该线程中任意的后续操作</li>
+<li>监视器锁规则：对一个锁的解锁操作，happens-before于随后对这个锁的加锁操作</li>
+<li>volatile变量规则：对一个volatile变量的写操作，happens-before于任意线程后续对这个volatile变量的读</li>
+<li>传递性规则：若 A happens-before B，且 B happens-before C，那么A happens-before C</li>
+</ol>
+<blockquote>
+<p>Memory Barrier 内存屏障</p>
+</blockquote>
+<p>Memory Barrier为一个CPU指令，可保证特定操作的执行顺序，影响某些数据的内存可见性（或影响某条指令的执行结果）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>.插入一条Memory Barrier指令，可使编译器和CPU不管什么指令都不能和这条Memory Barrier指令重排序</div><div class="line"><span class="comment">//通常情况下，编译器和CPU尝试优化性，进行重排序指令（但须保证最终结果相同）</span></div><div class="line"><span class="number">2</span>.Memory Barrier指令可强制刷出各种CPU cache</div><div class="line"><span class="comment">//如一个 Write-Barrier将刷出所有在 Barrier 之前写入 cache 的数据，因此，任何CPU上的线程都能读取到这些数据的最新版本</span></div></pre></td></tr></table></figure>
+<h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3><p>volatile就是基于Memory Barrier实现的，如果一个变量是volatile修饰的，JMM会在写入这个字段之后<br>插进一个Write-Barrier指令，并在读这个字段之前插入一个Read-Barrier指令，<br>所以，如果写入一个volatile变量a，可以保证：<br>1、一个线程写入变量a后，任何线程访问该变量都会拿到最新值<br>2、在写入变量a之前的写入操作，其更新的数据对于其他线程也是可见的</p>
+<blockquote>
+<p>指令重排序</p>
+</blockquote>
+<h3 id="常见指令重排序"><a href="#常见指令重排序" class="headerlink" title="常见指令重排序"></a>常见指令重排序</h3><p>1、编译器优化重排序：编译器在不改变单线程程序语义的前提下，可以重新安排语句的执行顺序<br>2、指令级并行的重排序：如果不存l在数据依赖性，处理器可以改变语句对应机器指令的执行顺序<br>3、内存系统的重排序：处理器使用缓存和读写缓冲区，这使得加载和存储操作看上去可能是在乱序执行</p>
+<h3 id="数据依赖性"><a href="#数据依赖性" class="headerlink" title="数据依赖性"></a>数据依赖性</h3><p>如果两个操作访问同一个变量，其中一个为写操作，此时这两个操作之间存在数据依赖性<br>编译器和处理器不会改变存在数据依赖性关系的两个操作的执行顺序，即不会重排序</p>
+<h3 id="as-if-serial"><a href="#as-if-serial" class="headerlink" title="as-if-serial"></a>as-if-serial</h3><p>不管怎么重排序，单线程下的执行结果不能被改变，编译器、runtime和处理器都必须遵守as-if-serial语义</p>
+<blockquote>
+<p>总结</p>
+</blockquote>
+<p>java线程之间的通信由JMM控制，JMM决定一个线程对共享变量（实例域、静态域和数组）的写入何时对其它线程可见</p>
+<p>线程A和线程B通信步骤如下<br>1、线程A把本地内存中更新过的共享变量刷新到主内存中<br>2、线程B到主内存中读取线程A之前更新过的共享变量</p>
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/23/jmm/" class="archive-article-date">
-  	<time datetime="2017-03-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-03-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/23/jmm/">Java内存模型</a>
-    </h1>
-  
+    </div>
+    <div class="article-info article-info-index">
+      
+	  
+	  
+	  
+      
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/18/concurrent/" class="archive-article-date">
-  	<time datetime="2017-03-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-03-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/18/concurrent/">ConcurrentHashMap</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/14/threadlocal/" class="archive-article-date">
-  	<time datetime="2017-03-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-03-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/14/threadlocal/">ThreadLocal</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/12/list/" class="archive-article-date">
-  	<time datetime="2017-03-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-03-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/12/list/">集合类(二)</a>
-    </h1>
-  
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="jmm" data-title="Java内存模型" data-url="http://lutils.cn/2017/03/23/jmm/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"lutils"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/11/hash/" class="archive-article-date">
-  	<time datetime="2017-03-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-03-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/11/hash/">集合类(一)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/">&raquo; Next</a>
-    </nav>
-  
 
 
       </div>
@@ -333,8 +244,8 @@
 		mathjax: false,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

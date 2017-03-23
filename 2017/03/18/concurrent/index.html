@@ -14,7 +14,7 @@
 <meta property="og:description" content="在多线程环境下，避免使用HashMap时存在丢失数据的情况">
 <meta property="og:image" content="http://lutils.cn/assets/img/conhash1.7.png">
 <meta property="og:image" content="http://lutils.cn/assets/img/conhash1.8.png">
-<meta property="og:updated_time" content="2017-03-19T10:53:44.658Z">
+<meta property="og:updated_time" content="2017-03-20T14:01:45.554Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ConcurrentHashMap">
 <meta name="twitter:description" content="在多线程环境下，避免使用HashMap时存在丢失数据的情况">
@@ -162,7 +162,7 @@
 </blockquote>
 <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>继承AbstractMap，实现ConcurrentMap<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcurrentHashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">ConcurrentMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;, <span class="title">Serializable</span></span></div></pre></td></tr></table></figure></p>
 <h3 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h3><p>解决HashMap线程不安全问题有Hashtable和Collections.synchronizedMap(hashMap)，<br>不过这两个方案基本上是对读写进行加锁操作，一个线程在读写元素，其余线程必须等待，性能较差</p>
-<p>而ConcurrentHashMap有效解决了性能问题<br>在jdk1.7中，ConcurrentHashMap采用的是Segment+HashEntry的方式进行实现，如下图所示<br><img src="/assets/img/conhash1.7.png" alt=""><br>其中Segment在实现上继承了ReentrantLock，这样就自带了锁的功能，这样就相当于将整个hsahmap分成<br>多个子map，每个segment都可以单独加锁，不属于同一个segment的结点可以并发进行操作，大大提高了性能</p>
+<p>而ConcurrentHashMap有效解决了性能问题<br>在jdk1.7中，ConcurrentHashMap采用的是Segment+HashEntry的方式进行实现，如下图所示<br><img src="/assets/img/conhash1.7.png" alt=""><br>其中Segment在实现上继承了ReentrantLock，这样就自带了锁的功能，这样就相当于将整个hashmap分成<br>多个子map，每个segment都可以单独加锁，不属于同一个segment的结点可以并发进行操作，大大提高了性能</p>
 <p>在jdk1.8中，取消了segment数组，而采用了Node数组（Table）的形式，如下图所示<br><img src="/assets/img/conhash1.8.png" alt=""></p>
 <h3 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h3><p>保存key，value及key的hash值的数据结构<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</div><div class="line">	<span class="keyword">final</span> <span class="keyword">int</span> hash;</div><div class="line">	<span class="keyword">final</span> K key;</div><div class="line">	<span class="keyword">volatile</span> V val;</div><div class="line">	<span class="keyword">volatile</span> Node&lt;K,V&gt; next;</div><div class="line">	</div><div class="line">	<span class="comment">//其他...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>使用volatile关键字修饰，保证并发的可见性</p>
@@ -280,7 +280,7 @@
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/oj/" style="font-size: 15px;">oj</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+    				<a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Web/" style="font-size: 16.67px;">Web</a> <a href="/tags/oj/" style="font-size: 13.33px;">oj</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/并发/" style="font-size: 13.33px;">并发</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
     			</div>
     	</section>
     
