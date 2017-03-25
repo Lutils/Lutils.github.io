@@ -6,16 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>Java内存模型 | Lutils</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java Memory Model">
+  <meta name="description" content="JMM规定了线程的工作内存和主内存的交互关系，以及线程之间的可见性和程序的执行顺序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java内存模型">
 <meta property="og:url" content="http://lutils.cn/2017/03/23/jmm/index.html">
 <meta property="og:site_name" content="Lutils">
-<meta property="og:description" content="Java Memory Model">
-<meta property="og:updated_time" content="2017-03-23T14:58:28.519Z">
+<meta property="og:description" content="JMM规定了线程的工作内存和主内存的交互关系，以及线程之间的可见性和程序的执行顺序">
+<meta property="og:updated_time" content="2017-03-25T11:57:26.340Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java内存模型">
-<meta name="twitter:description" content="Java Memory Model">
+<meta name="twitter:description" content="JMM规定了线程的工作内存和主内存的交互关系，以及线程之间的可见性和程序的执行顺序">
   
     <link rel="alternative" href="/atom.xml" title="Lutils" type="application/atom+xml">
   
@@ -153,16 +153,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Java Memory Model<br><a id="more"></a><br>在Java中，采用共享内存模型来实现多线程之间的信息交换和数据同步，线程之间通过共享程序公共的状态，<br>读写内存中公共状态的方式来进行隐式通信，因此存在内存可见性的问题</p>
+        <p>JMM规定了线程的工作内存和主内存的交互关系，以及线程之间的可见性和程序的执行顺序<br><a id="more"></a><br>在Java中，采用共享内存模型来实现多线程之间的信息交换和数据同步，线程之间通过共享程序公共的状态，<br>读写内存中公共状态的方式来进行隐式通信，因此存在内存可见性的问题</p>
+<blockquote>
+<p>并发编程的一些概念</p>
+</blockquote>
+<h3 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h3><p>一个操作或者多个操作要么全部执行要么全部不执行　　　//通过锁或者Synchronized来解决</p>
+<h3 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h3><p>当多个线程同时访问一个共享变量时，如果其中某个线程更改了该共享变量，其他线程应该可以立刻看到这个改变</p>
+<h3 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a>有序性</h3><p>程序的执行要按照代码的先后顺序执行</p>
 <blockquote>
 <p>happens-before原则</p>
 </blockquote>
-<p>在JMM中，若操作A的执行结果需要对操作B可见，那么A与B之间须存在happens-before关系<br>两个操作之间具有happens-before关系，并不意味前一个操作必须要在后一个操作之前执行，<br>仅要求前一个操作的执行结果，对于后一个操作是可见的，且前一个操作按顺序排在后一个操作之前</p>
+<p>happen-before原则是JMM中非常重要的原则，它是判断数据是否存在竞争、线程是否安全的主要依据，保证了多线程环境下的可见性</p>
+<p>在JMM中，若操作A的执行结果需要对操作B可见，那么A与B之间须存在happens-before关系</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>.如果一个操作happens-before另一个操作，那么第一个操作的执行结果将对第二个操作可见，而且第一个操作的执行顺序排在第二个操作之前</div><div class="line"></div><div class="line"><span class="number">2</span>.两个操作之间存在happens-before关系，并不意味着一定要按照happens-before原则制定的顺序来执行，如果重排序之后的执行结果与按照happens-before关系来执行的结果一致，那么这种重排序并不非法</div></pre></td></tr></table></figure>
 <h3 id="常见关系"><a href="#常见关系" class="headerlink" title="常见关系"></a>常见关系</h3><ol>
-<li>程序顺序规则：一个线程中的每个操作，happens-before于该线程中任意的后续操作</li>
-<li>监视器锁规则：对一个锁的解锁操作，happens-before于随后对这个锁的加锁操作</li>
-<li>volatile变量规则：对一个volatile变量的写操作，happens-before于任意线程后续对这个volatile变量的读</li>
-<li>传递性规则：若 A happens-before B，且 B happens-before C，那么A happens-before C</li>
+<li>程序次序规则：一个线程内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作</li>
+<li>锁定规则：一个unLock操作先行发生于后面对同一个锁额lock操作</li>
+<li>volatile变量规则：对一个变量的写操作先行发生于后面对这个变量的读操作</li>
+<li>传递规则：如果操作A先行发生于操作B，而操作B又先行发生于操作C，则可以得出操作A先行发生于操作C</li>
+<li>线程启动规则：Thread对象的start()方法先行发生于此线程的每个一个动作</li>
+<li>线程中断规则：对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生</li>
+<li>线程终结规则：线程中所有的操作都先行发生于线程的终止检测，我们可以通过Thread.join()方法结束、Thread.isAlive()的返回值手段检测到线程已经终止执行</li>
+<li>对象终结规则：一个对象的初始化完成先行发生于他的finalize()方法的开始<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>.如果两个操作不存在上述任一一个happens-before规则，那么这两个操作就没有顺序的保障，JVM可以对这两个操作进行重排序</div><div class="line"><span class="number">2</span>.如果操作A happens-before操作B，那么操作A在内存上所做的操作对操作B都是可见的</div></pre></td></tr></table></figure>
+</li>
 </ol>
 <blockquote>
 <p>Memory Barrier 内存屏障</p>
@@ -173,9 +186,12 @@
 <blockquote>
 <p>指令重排序</p>
 </blockquote>
+<p>重排序要求：在单线程环境下不能改变程序运行的结果、存在数据依赖关系的不允许重排序</p>
+<p>重排序是引起多线程不安全的一个重要因素</p>
 <h3 id="常见指令重排序"><a href="#常见指令重排序" class="headerlink" title="常见指令重排序"></a>常见指令重排序</h3><p>1、编译器优化重排序：编译器在不改变单线程程序语义的前提下，可以重新安排语句的执行顺序<br>2、指令级并行的重排序：如果不存l在数据依赖性，处理器可以改变语句对应机器指令的执行顺序<br>3、内存系统的重排序：处理器使用缓存和读写缓冲区，这使得加载和存储操作看上去可能是在乱序执行</p>
 <h3 id="数据依赖性"><a href="#数据依赖性" class="headerlink" title="数据依赖性"></a>数据依赖性</h3><p>如果两个操作访问同一个变量，其中一个为写操作，此时这两个操作之间存在数据依赖性<br>编译器和处理器不会改变存在数据依赖性关系的两个操作的执行顺序，即不会重排序</p>
-<h3 id="as-if-serial"><a href="#as-if-serial" class="headerlink" title="as-if-serial"></a>as-if-serial</h3><p>不管怎么重排序，单线程下的执行结果不能被改变，编译器、runtime和处理器都必须遵守as-if-serial语义</p>
+<h3 id="as-if-serial语义"><a href="#as-if-serial语义" class="headerlink" title="as-if-serial语义"></a>as-if-serial语义</h3><p>所有的操作均可以为了优化而被重排序，但执行结果不能被改变，编译器、runtime和处理器都必须遵守as-if-serial语义<br>仅支持单线程环境</p>
+<p>重排序不会影响单线程环境的执行结果，但是会破坏多线程的执行语义</p>
 <blockquote>
 <p>总结</p>
 </blockquote>
