@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>设计模式(二) | Lutils</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="结构型模式：代理/适配器/装饰/享元/桥接/组合/门面">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式(二)">
+<meta property="og:url" content="http://lutils.cn/2017/03/29/dp1/index.html">
+<meta property="og:site_name" content="Lutils">
+<meta property="og:description" content="结构型模式：代理/适配器/装饰/享元/桥接/组合/门面">
+<meta property="og:updated_time" content="2017-04-01T09:09:14.241Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式(二)">
+<meta name="twitter:description" content="结构型模式：代理/适配器/装饰/享元/桥接/组合/门面">
+  
+    <link rel="alternative" href="/atom.xml" title="Lutils" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <script src="/style.js"></script>
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="\assets\img\headimg.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Lutils</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/comments.html">留言板</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Lutils" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=SSU8PSAlOgk4OGcqJiQ" title="mail">mail</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Lutils</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="\assets\img\headimg.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Lutils</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/comments.html">留言板</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Lutils" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=SSU8PSAlOgk4OGcqJiQ" title="mail">mail</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-dp1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      设计模式(二)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>结构型模式：代理/适配器/装饰/享元/桥接/组合/门面</p>
+<a id="more"></a>
+<blockquote>
+<p>代理模式</p>
+</blockquote>
+<p>为其他对象提供一种代理以控制对这个对象的访问</p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>当不想直接访问某个对象或访问存在困难时，可以通过一个代理对象来间接访问，<br>为了保证客户端使用的透明性，委托对向与代理对象需要实现相同的接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//公共接口</span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">ProxyInterface</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//被代理类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">implements</span> <span class="title">ProxyInterface</span> </span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"被代理类"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h3><p>代理者的代码由程序员自己或通过一些自动化工具生成的固定代码，再对其进行编译，<br>即我们的代码在运行前代理类的class编译文件就已经存在</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//静态代理类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyProxy</span> <span class="keyword">implements</span> <span class="title">ProxyInterface</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> ProxyInterface m;</div><div class="line">	<span class="comment">//需实现相同的接口，注入被代理类</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MyProxy</span><span class="params">(ProxyInterface m)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.m = m;</div><div class="line">	&#125;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"静态代理=&gt;前执行"</span>);</div><div class="line">		m.test();	<span class="comment">//代用被代理类方法</span></div><div class="line">		System.out.println(<span class="string">"静态代理=&gt;后执行"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//main方法执行</span></div><div class="line">A a = <span class="keyword">new</span> A();</div><div class="line"><span class="keyword">new</span> MyProxy(a).test();	<span class="comment">//静态代理</span></div></pre></td></tr></table></figure>
+<h3 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h3><p>通过反射机制动态的生成代理者的对象，常用的有jdk动态代理、cglib动态代理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//jdk动态代理类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DynamicProxy</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> Object obj;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">DynamicProxy</span><span class="params">(Object obj)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.obj = obj;</div><div class="line">	&#125;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span></span></div><div class="line">			<span class="keyword">throws</span> Throwable &#123;</div><div class="line">		System.out.println(<span class="string">"动态代理=&gt;前执行"</span>);</div><div class="line">		<span class="comment">//调用被代理类对象的方法</span></div><div class="line">		Object result = method.invoke(obj, args);</div><div class="line">		System.out.println(<span class="string">"动态代理=&gt;后执行"</span>);</div><div class="line">		<span class="keyword">return</span> result;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="main方法调用"><a href="#main方法调用" class="headerlink" title="main方法调用"></a>main方法调用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">A a = <span class="keyword">new</span> A();</div><div class="line"><span class="comment">//动态代理</span></div><div class="line">InvocationHandler invocationHandler = <span class="keyword">new</span> DynamicProxy(a);</div><div class="line">ProxyInterface mProxy = (ProxyInterface) Proxy.newProxyInstance(</div><div class="line">		a.getClass().getClassLoader(),</div><div class="line">		a.getClass().getInterfaces(),</div><div class="line">		invocationHandler);</div><div class="line">mProxy.test();</div></pre></td></tr></table></figure>
+<blockquote>
+<p>适配器模式</p>
+</blockquote>
+<p>把一个类的接口变换成客户端所期待的另一种接口，从而使原本因接口不匹配而无法在一起工作的二个类能够在一起工作</p>
+<h3 id="使用场景-1"><a href="#使用场景-1" class="headerlink" title="使用场景"></a>使用场景</h3><p>接口不兼容、建立一个可重复使用的类用于类与类之间的合作、需要一个统一的输出接口但输入类型不可预知</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//目标接口  -  200V适配为5V</span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">FiveVolt</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">getVolt5</span><span class="params">()</span></span>;	<span class="comment">//5V</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//Adaptee，需要被适配的对象</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Volt200</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getVolt200</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">200</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="类适配器模式"><a href="#类适配器模式" class="headerlink" title="类适配器模式"></a>类适配器模式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Adapter角色</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">VoltAdapter</span> <span class="keyword">extends</span> <span class="title">Volt200</span> <span class="keyword">implements</span> <span class="title">FiveVolt</span> </span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getVolt5</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">5</span>;	</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="对象适配器模式"><a href="#对象适配器模式" class="headerlink" title="对象适配器模式"></a>对象适配器模式</h3><p>Adapter不是使用继承关系连接到Adaptee，而是使用组合关系</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">VoltAdapter2</span> <span class="keyword">implements</span> <span class="title">FiveVolt</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> Volt200 mVolt200;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">VoltAdapter2</span><span class="params">(Volt200 mVolt200)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.mVolt200 = mVolt200;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getVolt200</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> mVolt200.getVolt200();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getVolt5</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">5</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>装饰模式</p>
+</blockquote>
+<p>动态的给一个对象添加一些额外的职责，是继承关系的替代方式之一</p>
+<h3 id="使用场景-2"><a href="#使用场景-2" class="headerlink" title="使用场景"></a>使用场景</h3><p>需要动态且透明的扩展类的功能时</p>
+<h3 id="抽象组件类"><a href="#抽象组件类" class="headerlink" title="抽象组件类"></a>抽象组件类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Component</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="具体实现类"><a href="#具体实现类" class="headerlink" title="具体实现类"></a>具体实现类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"被装饰的方法"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="抽象装饰类"><a href="#抽象装饰类" class="headerlink" title="抽象装饰类"></a>抽象装饰类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Decorator</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> Component component; <span class="comment">//必须</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Decorator</span><span class="params">(Component component)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.component = component;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span> </span>&#123;</div><div class="line">		component.operate();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="装饰者实现类"><a href="#装饰者实现类" class="headerlink" title="装饰者实现类"></a>装饰者实现类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteDecorator</span> <span class="keyword">extends</span> <span class="title">Decorator</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ConcreteDecorator</span><span class="params">(Component component)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>(component);</div><div class="line">	&#125;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"装饰方法=&gt;前。。。"</span>);</div><div class="line">		<span class="keyword">super</span>.operate();</div><div class="line">		System.out.println(<span class="string">"装饰方法=&gt;后。。。"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="具体main方法实现"><a href="#具体main方法实现" class="headerlink" title="具体main方法实现"></a>具体main方法实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//构造被装饰的组件对象</span></div><div class="line">Component component = <span class="keyword">new</span> ConcreteComponent();</div><div class="line"><span class="comment">//装饰模式</span></div><div class="line">Decorator decorator = <span class="keyword">new</span> ConcreteDecorator(component);</div><div class="line">decorator.operate();</div></pre></td></tr></table></figure>
+<h3 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h3><p>用以尽可能减少内存使用量，使用共享对象可有效支持大量的细粒度对象</p>
+<p>享元对象中的部分状态是可以共享，可共享的状态成为内部状态，不会随着环境的改变而改变，<br>不可共享状态称之为外部状态，会随环境的改变而改变</p>
+<p>经典享元模式中会建立一个对象容器Map，键为享元对象的内部状态，值为享元对象本身，<br>客户端程序通过这个内部状态从享元工厂中获取享元对象，若有缓存则使用缓存对象，<br>否则创建一个享元对象并且放进容器中，这样就避免了创建过多对象的问题</p>
+<h3 id="使用场景-3"><a href="#使用场景-3" class="headerlink" title="使用场景"></a>使用场景</h3><ol>
+<li>系统中存在大量的相似对象</li>
+<li>细粒度的对象都具备较接近的外部状态，而且内部状态与环境无关</li>
+<li>需要缓冲池的场景</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//享元模式举例</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TicketFactroy</span> </span>&#123;</div><div class="line">	<span class="comment">//map作为缓存容器</span></div><div class="line">	<span class="keyword">static</span> Map&lt;String,Ticket&gt; map = <span class="keyword">new</span> ConcurrentHashMap&lt;&gt;();</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Ticket <span class="title">getTicket</span><span class="params">(String from ,String to)</span> </span>&#123;</div><div class="line">		String key = from + <span class="string">"-"</span> + to;</div><div class="line">		<span class="keyword">if</span>(map.containsKey(key)) &#123;</div><div class="line">			<span class="comment">//使用缓存</span></div><div class="line">			<span class="keyword">return</span> map.get(key);</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			<span class="comment">//若无缓存则重新创建一个对象</span></div><div class="line">			TrainTicket ticket = <span class="keyword">new</span> TrainTicket(from, to);</div><div class="line">			<span class="comment">//加入缓存</span></div><div class="line">			map.put(key, ticket);</div><div class="line">			<span class="keyword">return</span> ticket;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>桥接模式</p>
+</blockquote>
+<p>将抽象部分与实现部分分离，使他们都可以进行独立地变化</p>
+<h3 id="使用场景-4"><a href="#使用场景-4" class="headerlink" title="使用场景"></a>使用场景</h3><p>一个类存在二个独立变化的维度，且这二个维度都需要进行扩展<br>对于那些不希望使用继承或者因为多层次继承导致系统类的个数急剧增加的系统，也可以使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//实现部分的抽象接口</span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Implementor</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//具体实现类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteImplementor</span> <span class="keyword">implements</span> <span class="title">Implementor</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">//...</span></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//抽象部分实现</span></div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Abstraction</span> </span>&#123;</div><div class="line">	<span class="comment">//用于引用实现部分的对象</span></div><div class="line">	<span class="keyword">private</span> Implementor implementor;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Abstraction</span><span class="params">(Implementor implementor)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.implementor = implementor;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 通过调用实现部分的具体方法实现具体的功能</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span> </span>&#123;</div><div class="line">		implementor.operate();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div><div class="line"><span class="comment">//抽象部分子类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">RefinedAbstraction</span> <span class="keyword">extends</span> <span class="title">Abstraction</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">RefinedAbstraction</span><span class="params">(Implementor implementor)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>(implementor);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//对父类抽象部分的方法进行扩展</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">refinedOperation</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">//...</span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>组合模式</p>
+</blockquote>
+<p>将对象组合成树形结构以表示”整体-部分”的层次结构，使得对单个对象和组合对象的使用具有一致性</p>
+<h3 id="使用场景-5"><a href="#使用场景-5" class="headerlink" title="使用场景"></a>使用场景</h3><p>表示对象的部分-整体层次结构时或从一个整体中能够独立出部分模块或功能的场景</p>
+<h3 id="抽象根节点"><a href="#抽象根节点" class="headerlink" title="抽象根节点"></a>抽象根节点</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Component</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="keyword">protected</span> String name;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Component</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span></span>;	<span class="comment">//具体逻辑方法由子类实现</span></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 添加子节点</div><div class="line">	 * <span class="doctag">@param</span> child</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">addChild</span><span class="params">(Component child)</span></span>;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 移除子节点</div><div class="line">	 * <span class="doctag">@param</span> child</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">removeChild</span><span class="params">(Component child)</span></span>;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 获取子节点</div><div class="line">	 * <span class="doctag">@param</span> child</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Component <span class="title">getChild</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="具体枝干结点"><a href="#具体枝干结点" class="headerlink" title="具体枝干结点"></a>具体枝干结点</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Composite</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 存储结点的容器</div><div class="line">	 */</div><div class="line">	<span class="keyword">private</span> List&lt;Component&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Composite</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>(name);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(name);</div><div class="line">		<span class="keyword">if</span>(list != <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">for</span> (Component c : list) &#123;</div><div class="line">				c.doSomething();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addChild</span><span class="params">(Component child)</span> </span>&#123;</div><div class="line">		list.add(child);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeChild</span><span class="params">(Component child)</span> </span>&#123;</div><div class="line">		list.remove(child);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Component <span class="title">getChild</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> list.get(index);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="叶子结点"><a href="#叶子结点" class="headerlink" title="叶子结点"></a>叶子结点</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Leaf</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Leaf</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>(name);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(name);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addChild</span><span class="params">(Component child)</span> </span>&#123;</div><div class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException(<span class="string">"叶子结点没有子节点"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeChild</span><span class="params">(Component child)</span> </span>&#123;</div><div class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException(<span class="string">"叶子结点没有子节点"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Component <span class="title">getChild</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException(<span class="string">"叶子结点没有子节点"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="具体main方法"><a href="#具体main方法" class="headerlink" title="具体main方法"></a>具体main方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	<span class="comment">//构造一个根结点</span></div><div class="line">	Component root = <span class="keyword">new</span> Composite(<span class="string">"Root"</span>);</div><div class="line">	<span class="comment">//构造枝干结点</span></div><div class="line">	Component branch1 = <span class="keyword">new</span> Composite(<span class="string">"Branch1"</span>);</div><div class="line">	Component branch2 = <span class="keyword">new</span> Composite(<span class="string">"Branch2"</span>);</div><div class="line">	<span class="comment">//构造叶子结点</span></div><div class="line">	Component leaf1 = <span class="keyword">new</span> Leaf(<span class="string">"Leaf1"</span>);</div><div class="line">	Component leaf2 = <span class="keyword">new</span> Leaf(<span class="string">"Leaf2"</span>);</div><div class="line">	<span class="comment">//添加</span></div><div class="line">	branch1.addChild(leaf1);</div><div class="line">	branch2.addChild(leaf2);</div><div class="line">	root.addChild(branch1);</div><div class="line">	root.addChild(branch2);</div><div class="line">	<span class="comment">//执行方法</span></div><div class="line">	root.doSomething();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>门面模式/外观模式</p>
+</blockquote>
+<p>要求一个子系统外部与其内部的通信必须通过一个统一的对象进行，门面模式提供一个高层次的接口，使子系统更加易用</p>
+<h3 id="使用场景-6"><a href="#使用场景-6" class="headerlink" title="使用场景"></a>使用场景</h3><p>为一个复杂子系统提供一个简单接口或当需构建一个层次结构的子系统时</p>
+<p>具体代码参看：<a href="https://github.com/Lutils/DesignPattern" target="_blank" rel="external">https://github.com/Lutils/DesignPattern</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+	  
+	  
+	  
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="dp1" data-title="设计模式(二)" data-url="http://lutils.cn/2017/03/29/dp1/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"lutils"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+
+    <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div>
+    		&copy; 2017 Lutils
+    	</div>
+		
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+
+
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Web/" style="font-size: 16.67px;">Web</a> <a href="/tags/oj/" style="font-size: 13.33px;">oj</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/并发/" style="font-size: 13.33px;">并发</a> <a href="/tags/设计模式/" style="font-size: 13.33px;">设计模式</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.anneke.cn/">卷猫</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
