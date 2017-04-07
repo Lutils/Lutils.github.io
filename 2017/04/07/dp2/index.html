@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>设计模式(三) | Lutils</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="行为型模式：责任链/命令/迭代器/中介/备忘录/观察者/访问者/策略/状态/模板">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式(三)">
+<meta property="og:url" content="http://lutils.cn/2017/04/07/dp2/index.html">
+<meta property="og:site_name" content="Lutils">
+<meta property="og:description" content="行为型模式：责任链/命令/迭代器/中介/备忘录/观察者/访问者/策略/状态/模板">
+<meta property="og:updated_time" content="2017-04-07T09:09:10.566Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式(三)">
+<meta name="twitter:description" content="行为型模式：责任链/命令/迭代器/中介/备忘录/观察者/访问者/策略/状态/模板">
+  
+    <link rel="alternative" href="/atom.xml" title="Lutils" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <script src="/style.js"></script>
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="\assets\img\headimg.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Lutils</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/comments.html">留言板</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Lutils" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=SSU8PSAlOgk4OGcqJiQ" title="mail">mail</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Lutils</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="\assets\img\headimg.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Lutils</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/comments.html">留言板</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Lutils" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=SSU8PSAlOgk4OGcqJiQ" title="mail">mail</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-dp2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      设计模式(三)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>行为型模式：责任链/命令/迭代器/中介/备忘录/观察者/访问者/策略/状态/模板</p>
+<a id="more"></a>
+<blockquote>
+<p>观察者模式</p>
+</blockquote>
+<p>定义对象间一种一对多的依赖关系，使得每当一个对象发生改变时，所有依赖于<br>他的对象都会得到通知并被自动更新</p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ol>
+<li>关联行为场景（关联行为可拆分，不是组合关系）</li>
+<li>事件多级触发场景</li>
+<li>跨系统的消息交换场景（如消息队列、事件总线的处理机制）</li>
+</ol>
+<h3 id="观察者"><a href="#观察者" class="headerlink" title="观察者"></a>观察者</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//实现Observer接口</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Coder</span> <span class="keyword">implements</span> <span class="title">Observer</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Coder</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(Observable o, Object arg)</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"用户名："</span> + name + <span class="string">",发布内容"</span> + arg);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="被观察的角色"><a href="#被观察的角色" class="headerlink" title="被观察的角色"></a>被观察的角色</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//继承Observable类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Poster</span> <span class="keyword">extends</span> <span class="title">Observable</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">post</span><span class="params">(String content)</span> </span>&#123;</div><div class="line">		<span class="comment">// 标识状态或者内容发生改变</span></div><div class="line">		setChanged();</div><div class="line">		<span class="comment">// 通知所有观察者</span></div><div class="line">		notifyObservers(content);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="具体main方法"><a href="#具体main方法" class="headerlink" title="具体main方法"></a>具体main方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 被观察角色</span></div><div class="line">Poster poster = <span class="keyword">new</span> Poster();</div><div class="line"><span class="comment">// 观察者</span></div><div class="line">Coder bob = <span class="keyword">new</span> Coder(<span class="string">"Bob"</span>);</div><div class="line">Coder jack = <span class="keyword">new</span> Coder(<span class="string">"Jack"</span>);</div><div class="line"><span class="comment">// 注册观察者列表</span></div><div class="line">poster.addObserver(bob);</div><div class="line">poster.addObserver(jack);</div><div class="line"><span class="comment">// 发布消息</span></div><div class="line">poster.post(<span class="string">"发布新的内容了！"</span>);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>责任链模式</p>
+</blockquote>
+<p>使多个对象都有机会处理请求，从而避免了请求的发送者和和接收者之间的耦合关系<br>将这些对象连成一条链，并沿着这条链传递请求，直到有对象处理他为止</p>
+<h3 id="使用场景-1"><a href="#使用场景-1" class="headerlink" title="使用场景"></a>使用场景</h3><ol>
+<li>多个对象可以处理同一个请求，但具体哪个对象则在处理中动态决定</li>
+<li>在请求处理者不明确的情况下向多个对象中的一个提交一个请求</li>
+<li>需要动态指定一组对象处理请求</li>
+</ol>
+<h3 id="抽象处理者"><a href="#抽象处理者" class="headerlink" title="抽象处理者"></a>抽象处理者</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Handler</span> </span>&#123;</div><div class="line">	<span class="comment">// 下一结点的处理者</span></div><div class="line">	<span class="keyword">protected</span> Handler successor;</div><div class="line">	<span class="comment">// 请求处理</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">handleRequest</span><span class="params">(String condition)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="具体处理者"><a href="#具体处理者" class="headerlink" title="具体处理者"></a>具体处理者</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//具体处理者1</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteHandler1</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleRequest</span><span class="params">(String condition)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span>(condition.equals(<span class="string">"ConcreteHandler1"</span>)) &#123;</div><div class="line">			System.out.println(<span class="string">"ConcreteHandler1 Handled"</span>);</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			<span class="comment">//交付下一结点的处理者</span></div><div class="line">			successor.handleRequest(condition);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//具体处理者2</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteHandler2</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleRequest</span><span class="params">(String condition)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span>(condition.equals(<span class="string">"ConcreteHandler2"</span>)) &#123;</div><div class="line">			System.out.println(<span class="string">"ConcreteHandler2 Handled"</span>);</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			<span class="comment">//交付下一结点的处理者	</span></div><div class="line">			successor.handleRequest(condition);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="具体main方法-1"><a href="#具体main方法-1" class="headerlink" title="具体main方法"></a>具体main方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ConcreteHandler1 handler1 = <span class="keyword">new</span> ConcreteHandler1();</div><div class="line">ConcreteHandler2 handler2 = <span class="keyword">new</span> ConcreteHandler2();</div><div class="line"><span class="comment">//handler1的下一结点</span></div><div class="line">handler1.successor = handler2;</div><div class="line"><span class="comment">//处理请求</span></div><div class="line">handler1.handleRequest(<span class="string">"ConcreteHandler2"</span>);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>命令模式</p>
+</blockquote>
+<p>将一个请求封装成一个对象，从而让用户使用不同的请求把客户端参数化<br>对请求排队或者记录请求日志，以及支持可撤销的操作</p>
+<h3 id="使用场景-2"><a href="#使用场景-2" class="headerlink" title="使用场景"></a>使用场景</h3><ol>
+<li>需要抽象出待执行的操作，然后以参数的形式提供出来</li>
+<li>在不同的时刻指定、排序和执行请求</li>
+<li>需要执行取消操作、支持修改日志功能、需要支持事务操作</li>
+</ol>
+<h3 id="抽象命令接口"><a href="#抽象命令接口" class="headerlink" title="抽象命令接口"></a>抽象命令接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Command</span> </span>&#123;</div><div class="line">	<span class="comment">//具体执行操作的命令</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="接收者类"><a href="#接收者类" class="headerlink" title="接收者类"></a>接收者类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Receiver</span> </span>&#123;</div><div class="line">	<span class="comment">//真正执行具体逻辑命令的方法</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">action</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"执行具体操作"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="具体命令类"><a href="#具体命令类" class="headerlink" title="具体命令类"></a>具体命令类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteCommand</span> <span class="keyword">implements</span> <span class="title">Command</span> </span>&#123;</div><div class="line">	<span class="comment">//持有一个对接收者对象的引用</span></div><div class="line">	<span class="keyword">private</span> Receiver receiver;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ConcreteCommand</span><span class="params">(Receiver receiver)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.receiver = receiver;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">//调用接收者相关方法来执行具体逻辑</span></div><div class="line">		receiver.action();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="请求者类"><a href="#请求者类" class="headerlink" title="请求者类"></a>请求者类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Invoker</span> </span>&#123;</div><div class="line">	<span class="comment">//持有一个对命令对象的引用</span></div><div class="line">	<span class="keyword">private</span> Command command;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Invoker</span><span class="params">(Command command)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.command = command;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">action</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">//调用具体命令对象的相关方法，执行具体指令</span></div><div class="line">		command.execute();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="具体main方法-2"><a href="#具体main方法-2" class="headerlink" title="具体main方法"></a>具体main方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Receiver receiver = <span class="keyword">new</span> Receiver();</div><div class="line">Command command = <span class="keyword">new</span> ConcreteCommand(receiver);</div><div class="line">Invoker invoker = <span class="keyword">new</span> Invoker(command);</div><div class="line">invoker.action();</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+	  
+	  
+	  
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="dp2" data-title="设计模式(三)" data-url="http://lutils.cn/2017/04/07/dp2/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"lutils"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+
+    <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div>
+    		&copy; 2017 Lutils
+    	</div>
+		
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+
+
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Web/" style="font-size: 17.5px;">Web</a> <a href="/tags/oj/" style="font-size: 12.5px;">oj</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/并发/" style="font-size: 12.5px;">并发</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.anneke.cn/">卷猫</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
